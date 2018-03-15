@@ -1,0 +1,100 @@
+<section class="content-header">
+  <h1>
+  Usuarios
+    <small>Control panel</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Olimpiadas2019</li>
+  </ol>
+</section>
+
+
+
+<section class="content">
+    <section class="col-lg-12 connectedSortable">
+
+        <div class="box box-primary">
+          <table class="table table-hover table-dark">
+            <thead> <th>Id</th> <th>Nombres</th> <th>Apellidos</th> <th>Sexo</th> <th>Username</th> <th>Password</th><th>Tipo</th> <th>Opciones</th></thead>
+             <tbody> 
+               <tr  ng-repeat="u in usuarios">
+                    <th scope="row">{{u.rowid}}</th>
+                    <td>{{u.nombres}}</td>
+                    <td>{{u.apellidos}}</td>
+                    <td>{{u.sexo}}</td>
+                    <td>{{u.username}}</td>
+                    <td>{{u.password}}</td>
+                    <td>{{u.tipo}}</td>
+                    <td><button class="btn btn-danger glyphicon glyphicon-remove-sign"></button> </td>
+               </tr>
+             </tbody> 
+          </table>
+
+          <button type="button" class="btn btn-info" name="boton1" ng-click="mostrar()">Crear</button>
+            
+                  <div  ng-show="mostrando">
+                    <h2>Crea tus usuarios</h2>
+
+                    <div class="row">
+                      <div class="row">
+                        <div class="col-sm-3">
+                         <label>Nombres:</label> 
+                        </div>
+                        <div class="col-sm-3">
+                         <input type="text" ng-model="crea.nombres">
+                        </div>
+                      </div>
+                       <div class="row">
+                        <div class="col-sm-3">
+                         <label>Apellidos:</label> 
+                        </div>
+                        <div class="col-sm-3">
+                         <input type="text" ng-model="crea.apellidos">
+                        </div>
+                      </div>
+                       <div class="row">
+                        <div class="col-sm-3">
+                         <label>Sexo:</label> 
+                        </div>
+                        <div class="col-sm-3">
+                         <input type="text" ng-model="crea.sexo">
+                        </div>
+                      </div>
+                       <div class="row">
+                        <div class="col-sm-3">
+                         <label>Username:</label> 
+                        </div>
+                        <div class="col-sm-3">
+                         <input type="text" ng-model="crea.username">
+                        </div>
+                      </div>
+                       <div class="row">
+                        <div class="col-sm-3">
+                         <label>Password:</label> 
+                        </div>
+                        <div class="col-sm-3">
+                         <input type="text" ng-model="crea.password">
+                        </div>
+                      </div>
+                       <div class="row">
+                        <div class="col-sm-3">
+                         <label>Tipo:</label> 
+                        </div>
+                        <div class="col-sm-3">
+                       <select class="form-control" ng-model="crea.tipo">
+                            <option value="0">Admin</option>
+                            <option value="1">Usuario</option>
+                          </select>
+                        </div>
+                      </div>
+                    
+                      <button type="button" class="btn btn-info" ng-click="insertarUsuarios(crea)">Insertar</button>
+                      <button type="button" class="btn btn-danger" ng-click="salir()">Cancelar</button>
+
+                  </div>
+             </div>
+   </section>
+
+
+</section>
