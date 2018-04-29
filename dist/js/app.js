@@ -13,11 +13,29 @@ angular.module('olimpiada_boom',  [
 			controller:'DashboardCtrl',
 			templateUrl: 'dist/templates/dashboard.html'
 		})
-		.state('users',{
+		.state('main.users',{
 			name: 'users',
 			url: '/users',
 			controller:'usersCtrl',
 			templateUrl: 'dist/templates/usuarios.html'
+		})
+		.state('main.answer',{
+			name: 'answers',
+			url: '/answers',
+			controller:'answerCtrl',
+			templateUrl: 'dist/templates/respuestas.html'
+		})
+		.state('main.test',{
+			name: 'test',
+			url: '/tests',
+			controller:'testCtrl',
+			templateUrl: 'dist/templates/pruebas.html'
+		})
+		.state('main.ask',{
+			name: 'asks',
+			url: '/asks',
+			controller:'askCtrl',
+			templateUrl: 'dist/templates/preguntas.html'
 		});
 	 $urlRouterProvider.otherwise('/main');
 }]);

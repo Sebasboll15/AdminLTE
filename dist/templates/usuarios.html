@@ -12,26 +12,63 @@
 
 
 <section class="content">
+    <div class="row">
     <section class="col-lg-12 connectedSortable">
 
-        <div class="box box-primary">
+        <div class="box box-primary" style="overflow: auto;">
           <table class="table table-hover table-dark">
-            <thead> <th>Id</th> <th>Nombres</th> <th>Apellidos</th> <th>Sexo</th> <th>Username</th> <th>Password</th><th>Tipo</th> <th>Opciones</th></thead>
+            <thead> <th>Id</th> <th>Nombres</th> <th>Apellidos</th> <th>Sexo</th> <th>Username</th> <th>Inscrito a:</th> <th>Tipo</th> <th>Opciones</th></thead>
              <tbody> 
                <tr  ng-repeat="u in usuarios">
                     <th scope="row">{{u.rowid}}</th>
-                    <td>{{u.nombres}}</td>
-                    <td>{{u.apellidos}}</td>
-                    <td>{{u.sexo}}</td>
-                    <td>{{u.username}}</td>
-                    <td>{{u.password}}</td>
-                    <td>{{u.tipo}}</td>
-                    <td><button class="btn btn-danger glyphicon glyphicon-remove-sign"></button> </td>
+                    <td>
+                      <span ng-show="!u.editando">{{u.nombres}}</span>
+                      <span ng-show="u.editando"><input type="text" ng-model="u.nombres"></span>
+
+                    </td>
+                    <td><span ng-show="!u.editando">{{u.apellidos}}</span>
+                      <span ng-show="u.editando"><input type="text" ng-model="u.apellidos"></span>
+                     </td>
+                    <td><span ng-show="!u.editando">{{u.sexo}}</span>
+                      <span ng-show="u.editando">
+                        <label>
+                          <input type="radio" ng-model="u.sexo" value="M">M
+                        </label>
+                        
+                        <label>
+                          <input type="radio" ng-model="u.sexo" value="F">F
+                        </label>
+                        
+                      </span>
+                    </td>
+                    <td><span ng-show="!u.editando">{{u.username}}</span>
+                      <span ng-show="u.editando"><input type="text" ng-model="u.username"></span>
+                    </td>
+                    <td ><span ng-show="!u.editando">Prueba {{u.prueba_id}}</span>
+                        
+                    </td>
+                    <td><span ng-show="!u.editando">{{u.tipo}}</span>
+                      <span ng-show="u.editando">
+                        <label>
+                            <input type="radio" ng-model="u.tipo" value="Admin">Admin
+                          </label>
+                          <label>
+                            <input type="radio" ng-model="u.tipo" value="Usuario">Usuario
+                          </label>
+                    </td>
+                    <td style="padding: 0px;">
+                      <span ng-show="!u.editando">
+                        <button class="btn-sm btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_user(u.rowid)"></button> 
+                        <button ng-click="editarU(u)" class="btn-sm btn btn-info glyphicon glyphicon-pencil"></button> 
+                      </span>
+                       <button ng-click="editarUsuario(u)" ng-show="u.editando" class="btn-sm btn btn-info glyphicon glyphicon-ok"></button> 
+                    </td>
+                
                </tr>
              </tbody> 
           </table>
 
-          <button type="button" class="btn btn-info" name="boton1" ng-click="mostrar()">Crear</button>
+          <button type="button" class="btn btn-info" name="boton1" ng-show="!mostrando" ng-click="mostrar()">Crear</button>
             
                   <div  ng-show="mostrando">
                     <h2>Crea tus usuarios</h2>
@@ -53,13 +90,24 @@
                          <input type="text" ng-model="crea.apellidos">
                         </div>
                       </div>
-                       <div class="row">
+                      <div class="row">
                         <div class="col-sm-3">
                          <label>Sexo:</label> 
                         </div>
-                        <div class="col-sm-3">
-                         <input type="text" ng-model="crea.sexo">
-                        </div>
+                        
+                      
+                          <div class="col-sm-4">
+                           <label>
+                            <input type="radio" ng-model="crea.sexo" value="Masculino">Masculino
+                          </label>
+                           </div>
+                          <div class="col-sm-5">
+                          <label>
+                            <input type="radio" ng-model="crea.sexo" value="Femenino">Femenino
+                          </label>
+                          </div>
+                    
+                      </div>
                       </div>
                        <div class="row">
                         <div class="col-sm-3">
@@ -81,13 +129,20 @@
                         <div class="col-sm-3">
                          <label>Tipo:</label> 
                         </div>
-                        <div class="col-sm-3">
-                       <select class="form-control" ng-model="crea.tipo">
-                            <option value="0">Admin</option>
-                            <option value="1">Usuario</option>
-                          </select>
-                        </div>
-                      </div>
+                        
+                      
+                          <div class="col-sm-4">
+                           <label>
+                            <input type="radio" ng-model="crea.tipo" value="Admin">Admin
+                          </label>
+                           </div>
+                          <div class="col-sm-5">
+                          <label>
+                            <input type="radio" ng-model="crea.tipo" value="Usuario">Usuario
+                          </label>
+                          </div>
+                             <div class="row">
+                       
                     
                       <button type="button" class="btn btn-info" ng-click="insertarUsuarios(crea)">Insertar</button>
                       <button type="button" class="btn btn-danger" ng-click="salir()">Cancelar</button>
@@ -95,6 +150,6 @@
                   </div>
              </div>
    </section>
-
+   </div>
 
 </section>

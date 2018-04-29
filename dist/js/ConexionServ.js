@@ -5,17 +5,50 @@ angular.module('olimpiada_boom')
   var db;
 
 
-  db = window.openDatabase("MyVc.db", '1', 'Olimpiadas', 1024 * 1024 * 49);
+  db = window.openDatabase("Olimpiadas_Boom.db", '1', 'Olimpiadas_Boom', 1024 * 1024 * 49);
 
   sqlUsuarios = "CREATE TABLE IF NOT EXISTS usuarios (id integer," +
                 "nombres varchar(100)  NOT NULL collate nocase," +
                 "apellidos varchar(100)  DEFAULT NULL collate nocase," +
-                "sexo varchar(1)  NOT NULL," +
+                "sexo varchar(100)  NOT NULL," +
                 "username varchar(100)  NOT NULL collate nocase," +
                 "password varchar(100)  NOT NULL collate nocase," +
+                "prueba_id varchar(100)  DEFAULT NULL collate nocase," +
                 "tipo integer DEFAULT '0')";
 
-                
+sqlPreguntas = "CREATE TABLE IF NOT EXISTS preguntas (id integer," +
+                "definicion varchar(300)  NOT NULL collate nocase," +
+                "tipo varchar(100)  NOT NULL collate nocase," +
+                "prueba_id varchar(100)  DEFAULT NULL collate nocase," +
+                "opc_a varchar(100)  DEFAULT NULL collate nocase," +
+                "opc_b varchar(100)  DEFAULT NULL collate nocase," +
+                "opc_c varchar(100)  DEFAULT NULL collate nocase," +
+                "opc_d varchar(100)  DEFAULT NULL collate nocase," +
+                "correcta varchar(100)  NOT NULL collate nocase," +
+                "defini_img varchar(100)  DEFAULT NULL collate nocase," +
+                "opc_a_img varchar(100)  DEFAULT NULL collate nocase," +
+                "opc_b_img varchar(100)  DEFAULT NULL collate nocase," +
+                "opc_c_img varchar(100)  DEFAULT NULL collate nocase," +
+                "opc_d_img varchar(100)  DEFAULT NULL collate nocase," +
+                "puntos varchar(100)  DEFAULT NULL collate nocase)";
+
+sqlRespuestas = "CREATE TABLE IF NOT EXISTS respuestas (id integer," +
+                "preg_id varchar(100)  NOT NULL collate nocase," +
+                "usuario_id varchar(100)  DEFAULT NULL collate nocase," +
+                "opcion_elegida varchar(100)  NOT NULL," +
+                "correcta varchar(100)  NOT NULL collate nocase," +
+                "duracion varchar(100)  NOT NULL collate nocase)";       
+  
+  sqlPruebas = "CREATE TABLE IF NOT EXISTS pruebas (id integer," +
+                "nombre varchar(100)  NOT NULL collate nocase," +
+                "alias varchar(100)  DEFAULT NULL collate nocase," +
+                "dirigido varchar(100)  NOT NULL," +
+                "mostrar_respuesta varchar(100)  NOT NULL collate nocase," +
+                "puntos_promedio varchar(100)  NOT NULL collate nocase," +
+                "tiempo_preg varchar(100)  NOT NULL collate nocase," +
+                "tiempo_exam varchar(100)  NOT NULL collate nocase)";  
+           
+
     result = {
           
         createTables: function(){
@@ -31,7 +64,30 @@ angular.module('olimpiada_boom')
                 }, function(tx,error){
                     console.log("Tabla users NO se pudo crear", error.message);
                 })
-          
+                
+
+                 tx.executeSql(sqlPreguntas, [], function (tx, result) {
+                    console.log(' Tabla de preguntas creada');
+                    defered.resolve('Hasta tabla preguntas creada');
+                }, function(tx,error){
+                    console.log("Tabla preguntas NO se pudo crear", error.message);
+                })
+                 
+                 tx.executeSql(sqlRespuestas, [], function (tx, result) {
+                    console.log(' Tabla de respuestas creada');
+                    defered.resolve('Hasta tabla respuestas creada');
+                }, function(tx,error){
+                    console.log("Tabla respuestas NO se pudo crear", error.message);
+                })
+
+                   tx.executeSql(sqlPruebas, [], function (tx, result) {
+                    console.log(' Tabla de pruebas creada');
+                    defered.resolve('Hasta tabla pruebas creada');
+                }, function(tx,error){
+                    console.log("Tabla preguntas NO se pudo crear", error.message);
+                })
+
+
             });
   
         return defered.promise;
