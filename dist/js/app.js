@@ -1,5 +1,8 @@
 angular.module('olimpiada_boom',  [
-	'ui.router'
+	'ngSanitize',
+	'ui.router', 
+	'ui.bootstrap',
+	'ui.select'
 ])
 
 
@@ -7,12 +10,25 @@ angular.module('olimpiada_boom',  [
 
 
 	 $stateProvider
+		.state('login', {
+			name: 'login',
+			url: '/login',
+			controller: 'loginCtrl',
+			templateUrl: 'dist/templates/login.html'
+	    })
 		.state('main',{
 			name: 'main',
 			url: '/main',
 			controller:'DashboardCtrl',
-			templateUrl: 'dist/templates/dashboard.html'
+			templateUrl: 'dist/templates/dashboard.html',
+			resolve: {
+				USER: ['AuthServ', function(AuthServ){
+					return AuthServ.verificar_user_logueado();
+				}]
+			}
 		})
+		
+
 		.state('main.users',{
 			name: 'users',
 			url: '/users',

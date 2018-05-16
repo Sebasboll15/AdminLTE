@@ -1,8 +1,22 @@
 angular.module('olimpiada_boom')
 
-.controller('DashboardCtrl', function(ConexionServ, $scope){
+.controller('DashboardCtrl', function(ConexionServ, $scope, AuthServ){
 
   ConexionServ.createTables();
+	
+	AuthServ.verificar_user_logueado().then(function(r){
+		$scope.USER = r;
+		console.log($scope.USER)
+	})
+		
+
+  $scope.pregunta = {};
+  $scope.meses = [
+  	{mes: 'Enero'},
+  	{mes: 'Febrero'},
+  	{mes: 'Marzo'},
+  	{mes: 'Abril'}
+  ]
 
 consulta = "Select *, rowid from pruebas";
 	ConexionServ.query(consulta, []).then (function(result){

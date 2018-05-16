@@ -1,6 +1,7 @@
 <section class="content-header">
   <h1>
-  Usuarios
+  Usuarios 
+ 
     <small>Control panel</small>
   </h1>
   <ol class="breadcrumb">
@@ -62,6 +63,7 @@
                         <button ng-click="editarU(u)" class="btn-sm btn btn-info glyphicon glyphicon-pencil"></button> 
                       </span>
                        <button ng-click="editarUsuario(u)" ng-show="u.editando" class="btn-sm btn btn-info glyphicon glyphicon-ok"></button> 
+                        <button ng-click="abrirModal()" ng-show="u.editando" class="btn-sm btn btn-secondary ">Cambiar contraseña</button> 
                     </td>
                 
                </tr>
@@ -122,7 +124,15 @@
                          <label>Password:</label> 
                         </div>
                         <div class="col-sm-3">
-                         <input type="text" ng-model="crea.password">
+                         <input type="password"  ng-model="crea.password">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-3">
+                         <label>Confirme Password:</label> 
+                        </div>
+                        <div class="col-sm-3">
+                         <input type="password" ng-model="crea.password">
                         </div>
                       </div>
                        <div class="row">
