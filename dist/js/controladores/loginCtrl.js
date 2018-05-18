@@ -3,6 +3,7 @@ angular.module('olimpiada_boom')
   .controller('loginCtrl', function($scope,  $state, ConexionServ, $filter, $uibModal, AuthServ){
        $scope.user = {username: 'jorge', password: '123'}
     
+  
 
     
     $scope.iniciar = function(user){

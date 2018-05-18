@@ -17,27 +17,32 @@ angular.module('olimpiada_boom')
   	{mes: 'Marzo'},
   	{mes: 'Abril'}
   ]
+         
 
-consulta = "Select *, rowid from pruebas";
-	ConexionServ.query(consulta, []).then (function(result){
-		$scope.pruebas= result ;
+         $scope.traer_dato = function(){
+			consulta = "Select *, rowid from pruebas";
+				ConexionServ.query(consulta, []).then (function(result){
+					$scope.pruebas= result ;
 
-		console.log('Se trajo los datos con exito', result);
-	}, function(error){
-		console.log('No se pudo traer los datos', error);
+					console.log('Se trajo los datos con exito', result);
+				}, function(error){
+					console.log('No se pudo traer los datos', error);
 
-	})
-	consulta = "Select *, rowid from usuarios";
-	ConexionServ.query(consulta, []).then (function(result){
-		$scope.usuarios= result ;
+				})
+          };
+           $scope.traer_dato();
 
-		console.log('Se trajo los datos con exito', result);
-	}, function(error){
-		console.log('No se pudo traer los datos', error);
+				consulta = "Select *, rowid from usuarios";
+				ConexionServ.query(consulta, []).then (function(result){
+					$scope.usuarios= result ;
 
-	})
+					console.log('Se trajo los datos con exito', result);
+				}, function(error){
+					console.log('No se pudo traer los datos', error);
 
-  
+				})
+
+			  
 
 
 			$scope.anadir= function(id){
@@ -60,4 +65,13 @@ consulta = "Select *, rowid from pruebas";
 
 
 			};
+             
+			$scope.acceder= function(){
+              
+
+             AuthServ.cerrar_sesion();
+
+
+
+              };
 });

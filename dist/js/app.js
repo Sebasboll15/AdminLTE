@@ -15,6 +15,7 @@ angular.module('olimpiada_boom',  [
 			url: '/login',
 			controller: 'loginCtrl',
 			templateUrl: 'dist/templates/login.html'
+	        
 	    })
 		.state('main',{
 			name: 'main',
@@ -47,6 +48,7 @@ angular.module('olimpiada_boom',  [
 			controller:'testCtrl',
 			templateUrl: 'dist/templates/pruebas.html'
 		})
+		
 		.state('main.ask',{
 			name: 'asks',
 			url: '/asks',
