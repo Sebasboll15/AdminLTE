@@ -26,92 +26,110 @@
               <th>Opción C</th> 
               <th>Opción D</th> 
               <th>Respuesta Correcta</th> 
-              <th>Opciones</th>
+              <th style="min-width: 100px;">Opciones</th>
             </thead>
+            
             <tbody> 
                <tr  ng-repeat="p in preguntas">
+                    
                     <th scope="row">{{p.rowid}}</th>
+                    
                     <td>
                       <span ng-show="!p.editando">{{p.definicion}}</span>
                       <span ng-show="p.editando"><input type="text" ng-model="p.definicion"></span>
 
                     </td>
-                    <td><span ng-show="!p.editando">{{p.tipo}}</span>
-                   
-                        <span ng-show="p.editando">
-                          <label>
-                            <input type="radio" ng-model="p.tipo" value="Multiple">Múltiple
-                          </label>
-                          
-                          <label>
-                            <input type="radio" ng-model="p.tipo" value="Falso/Verdadero">Falso/Verdadero
-                          </label>
-                         </span> 
+                    <td>
+                        <span ng-show="!p.editando">{{p.tipo}}</span>
                      
-                    </td>
-
-                    <td><span ng-show="!p.editando">Prueba {{p.prueba_id}}</span>
                         <span ng-show="p.editando">
-                       <select class="form-control"  ng-model="p.prueba_id">
-                             <option ng-repeat="prueba in pruebas" value="{{prueba.rowid}}">{{prueba.alias}}</option>
-                           </select> 
-                        
-                      </span>
-                       
-                    </td>
-                    <td><span ng-show="!p.editando">{{p.opc_a}}</span>
-                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_a"></span>
-                     </td>
-                    
-                    <td><span ng-show="!p.editando">{{p.opc_b}}</span>
-                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_b"></span>
-                    </td>
-                    <td><span ng-show="!p.editando">{{p.opc_c}}</span>
-                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_c"></span>
-                    </td>
-                     <td><span ng-show="!p.editando">{{p.opc_d}}</span>
-                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_d"></span>
-                    </td>
-                    <td><span ng-show="!p.editando">{{p.correcta}}</span>
-                  <span ng-show="p.tipo == 'Multiple'"> 
-                      <span ng-show="p.editando">
-                        <label>
-                          <input type="radio" ng-model="p.correcta" value="A">A
-                        </label>
-                        
-                        <label>
-                          <input type="radio" ng-model="p.correcta" value="B">B
-                        </label>
-
-                        <label>
-                          <input type="radio" ng-model="p.correcta" value="C">C
-                        </label>
-
-                        <label>
-                          <input type="radio" ng-model="p.correcta" value="D">D
-                        </label>
-                        
-                      </span>
-                   </span>
-                       <span ng-show="p.tipo == 'Falso/Verdadero'">
-                           <span ng-show="p.editando">
+                            
                             <label>
-                              <input type="radio" ng-model="p.correcta" value="Verdadero">Verdadero
+                              <input type="radio" ng-model="p.tipo" value="Multiple">Múltiple
                             </label>
                             
                             <label>
-                              <input type="radio" ng-model="p.correcta" value="Falso">Falso
+                              <input type="radio" ng-model="p.tipo" value="Falso/Verdadero">Falso/Verdadero
                             </label>
+                           
+                        </span> 
+                       
+                    </td>
 
-                          </span>
-                    </span>
+                    <td>
+                      <span ng-show="!p.editando">Prueba {{p.prueba_id}}</span>
+                        <span ng-show="p.editando">
+                             <select class="form-control"  ng-model="p.prueba_id">
+                                   <option ng-repeat="prueba in pruebas" value="{{prueba.rowid}}">{{prueba.alias}}</option>
+                                 </select> 
+                        
+                        </span>
+                       
+                    </td>
+                    
+                    <td>
+                      <span ng-show="!p.editando">{{p.opc_a}}</span>
+                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_a"></span>
+                     </td>
+                    
+                    <td>
+                      <span ng-show="!p.editando">{{p.opc_b}}</span>
+                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_b"></span>
+                    </td>
+                    
+                    <td>
+                      <span ng-show="!p.editando">{{p.opc_c}}</span>
+                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_c"></span>
+                    </td>
+                     
+                     <td>
+                      <span ng-show="!p.editando">{{p.opc_d}}</span>
+                      <span ng-show="p.editando"><input type="text" ng-model="p.opc_d"></span>
+                    </td>
+
+                    <td>
+                        <span ng-show="!p.editando">{{p.correcta}}</span>
+                        <span ng-show="p.tipo == 'Multiple'"> 
+                            <span ng-show="p.editando">
+                              <label>
+                                <input type="radio" ng-model="p.correcta" value="A">A
+                              </label>
+                              
+                              <label>
+                                <input type="radio" ng-model="p.correcta" value="B">B
+                              </label>
+
+                              <label>
+                                <input type="radio" ng-model="p.correcta" value="C">C
+                              </label>
+
+                              <label>
+                                <input type="radio" ng-model="p.correcta" value="D">D
+                              </label>
+                              
+                            </span>
+                         </span>
+                             <span ng-show="p.tipo == 'Falso/Verdadero'">
+                                 <span ng-show="p.editando">
+                                  <label>
+                                    <input type="radio" ng-model="p.correcta" value="Verdadero">Verdadero
+                                  </label>
+                                  
+                                  <label>
+                                    <input type="radio" ng-model="p.correcta" value="Falso">Falso
+                                  </label>
+
+                                </span>
+                             </span>
                     </td>
                     <td style="padding: 0px;">
                       <span ng-show="!p.editando">
-                        <button class="btn-sm btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_ask(p.rowid)"></button> 
-                        <button ng-click="editarP(p)" class="btn-sm btn btn-info glyphicon glyphicon-pencil"></button> 
+                        <div class="btn-group">
+                            <button class="btn-xs btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_ask(p.rowid)" uib-tooltip="Eliminar"></button> 
+                            <button ng-click="editarP(p)" class="btn-xs btn btn-info glyphicon glyphicon-pencil" uib-tooltip="Editar"></button> 
+                        </div>
                       </span>
-                       <button ng-click="editarAsk(p)" ng-show="p.editando" class="btn-sm btn btn-info glyphicon glyphicon-ok"></button> 
+                       <button ng-click="editarAsk(p)" ng-show="p.editando" class="btn-xs btn btn-info glyphicon glyphicon-ok" ></button> 
                     </td>
                 
                </tr>

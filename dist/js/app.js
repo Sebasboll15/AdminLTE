@@ -10,13 +10,6 @@ angular.module('olimpiada_boom',  [
 
 
 	 $stateProvider
-		.state('login', {
-			name: 'login',
-			url: '/login',
-			controller: 'loginCtrl',
-			templateUrl: 'dist/templates/login.html'
-	        
-	    })
 		.state('main',{
 			name: 'main',
 			url: '/main',
@@ -29,6 +22,13 @@ angular.module('olimpiada_boom',  [
 			}
 		})
 		
+		.state('login', {
+			name: 'login',
+			url: '/login',
+			controller: 'loginCtrl',
+			templateUrl: 'dist/templates/login.html'
+	        
+	    })
 
 		.state('main.users',{
 			name: 'users',
@@ -55,5 +55,6 @@ angular.module('olimpiada_boom',  [
 			controller:'askCtrl',
 			templateUrl: 'dist/templates/preguntas.html'
 		});
-	 $urlRouterProvider.otherwise('/main');
+
+	 $urlRouterProvider.otherwise('/login');
 }]);

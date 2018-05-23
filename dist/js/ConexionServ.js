@@ -46,6 +46,7 @@ sqlRespuestas = "CREATE TABLE IF NOT EXISTS respuestas (id integer," +
                 "mostrar_respuesta varchar(100)  NOT NULL collate nocase," +
                 "puntos_promedio varchar(100)  NOT NULL collate nocase," +
                 "tiempo_preg varchar(100)  NOT NULL collate nocase," +
+                "actual integer(1)  DEFAULT NULL," +
                 "tiempo_exam varchar(100)  NOT NULL collate nocase)";  
            
 

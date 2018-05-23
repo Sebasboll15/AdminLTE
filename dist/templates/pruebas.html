@@ -16,8 +16,18 @@
     <section class="col-lg-12 connectedSortable">
 
         <div class="box box-primary" style="overflow: auto;">
-          <table class="table table-hover table-dark">
-            <thead> <th>Id</th> <th>Nombre</th> <th>Alias</th> <th>Dirigido o Manual</th> <th>Mostrar respuesta</th><th>Puntos o Promedio</th> <th>Tiempo de pregunta</th> <th>Tiempo de examen</th></thead>
+
+          <table class="table table-hover table-dark table-condensed">
+            <thead> 
+              <th>Id</th> <th>Nombre</th> 
+              <th>Alias</th> 
+              <th>Dirigido o Manual</th> 
+              <th>Mostrar respuesta</th>
+              <th>Puntos o Promedio</th> 
+              <th>Tiempo de pregunta</th> 
+              <th>Tiempo de examen</th>
+              <th style="min-width: 100px;">Opciones</th>
+            </thead>
              <tbody> 
                <tr  ng-repeat="p in pruebas">
                     <th scope="row">{{p.rowid}}</th>
@@ -62,7 +72,7 @@
                           <input type="radio" ng-model="p.puntos_promedio" value="Promedio">Promedio
                         </label> 
                     </td>
-                      <td><span ng-show="!p.editando">{{p.tiempo_preg}}</span>
+                    <td><span ng-show="!p.editando">{{p.tiempo_preg}}</span>
                       <span ng-show="p.editando">
                          <label>
                           <input type="radio" ng-model="p.por_tiempo_preg" value="Si">Si
@@ -74,8 +84,9 @@
                          <div ng-show="p.por_tiempo_preg=='Si'">
                              <input type="text" placeholder="Tiempo de pregunta" ng-model="p.tiempo_preg">
                          </div>
+                      </span>
                     </td>
-                       <td><span ng-show="!p.editando">{{p.tiempo_exam}}</span>
+                    <td><span ng-show="!p.editando">{{p.tiempo_exam}}</span>
                       <span ng-show="p.editando">
                          <input type="text" ng-model="tiempo_preg">
                      
@@ -86,11 +97,22 @@
 
                     <td style="padding: 0px;">
                       <span ng-show="!p.editando">
-                        <button class="btn-sm btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_test(p.rowid)"></button> 
-                        <button ng-click="editarP(p)" class="btn-sm btn btn-info glyphicon glyphicon-pencil"></button> 
-                        <button type="button" ng-click="Sesamo()"  class="btn btn-link">Ver detalles</button>
+                          <div class="btn-group">
+
+                            <button uib-tooltip="Eliminar" class="btn-xs btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_test(p.rowid)"></button> 
+                            
+                            <button type="button" ng-click="editarP(p)" uib-tooltip="Editar" class="btn-xs btn btn-info glyphicon glyphicon-pencil"></button> 
+                            
+                            <button ng-show="p.actual!=1" type="button" ng-click="seleccionarPrueba(p)" uib-tooltip="Seleccionar" class="btn-xs btn btn-info glyphicon glyphicon-hand-up"></button> 
+                            
+                            <button ng-show="p.actual==1" type="button" uib-tooltip="Seleccionada" class="btn-xs btn glyphicon glyphicon-thumbs-up"></button> 
+                            
+                            <button type="button" ng-click="verDetallesPrueba(p)" uib-tooltip="Ver Participantes"  class="btn btn-xs btn-default glyphicon glyphicon-menu-right"></button>
+
+                          </div>
                       </span>
-                       <button ng-click="editarPrueba(p)" ng-show="p.editando" class="btn-sm btn btn-info glyphicon glyphicon-ok"></button> 
+
+                       <button ng-click="editarPrueba(p)" ng-show="p.editando" class="btn-xs btn btn-info glyphicon glyphicon-ok"></button> 
                     </td>
                 
                </tr>
@@ -103,41 +125,45 @@
                     <h2>Crea tus pruebas</h2>
 
                     <div class="row">
-                      <div class="row">
-                        <div class="col-sm-3">
-                         <label>Nombre:</label> 
-                        </div>
-                        <div class="col-sm-3">
-                         <input type="text" ng-model="crea.nombre">
-                        </div>
-                      </div>
-                       <div class="row">
-                        <div class="col-sm-3">
-                         <label>Alias:</label> 
-                        </div>
-                        <div class="col-sm-3">
-                         <input type="text" ng-model="crea.alias">
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-sm-3">
-                         <label>Dirigido o Manual:</label> 
-                        </div>
-                        
-                      
-                          <div class="col-sm-4">
-                           <label>
-                            <input type="radio" ng-model="crea.dirigido" value="Dirigido">Dirigido
-                          </label>
-                           </div>
-                          <div class="col-sm-5">
-                          <label>
-                            <input type="radio" ng-model="crea.dirigido" value="Manual">Manual
-                          </label>
+                      <div class="col-sm-12">
+                          <div class="row">
+                            <div class="col-sm-3">
+                             <label>Nombre:</label> 
+                            </div>
+                            <div class="col-sm-3">
+                             <input type="text" ng-model="crea.nombre">
+                            </div>
                           </div>
-                    
+                           <div class="row">
+                            <div class="col-sm-3">
+                             <label>Alias:</label> 
+                            </div>
+                            <div class="col-sm-3">
+                             <input type="text" ng-model="crea.alias">
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-3">
+                             <label>Dirigido o Manual:</label> 
+                            </div>
+                            
+                          
+                              <div class="col-sm-4">
+                               <label>
+                                <input type="radio" ng-model="crea.dirigido" value="Dirigido">Dirigido
+                              </label>
+                               </div>
+                              <div class="col-sm-5">
+                              <label>
+                                <input type="radio" ng-model="crea.dirigido" value="Manual">Manual
+                              </label>
+                              </div>
+                        
+                            </div>
+                        </div>
                       </div>
-                      </div>
+
+
                        <div class="row">
                         <div class="col-sm-3">
                          <label>Mostrar respuesta?:</label> 
@@ -212,6 +238,19 @@
                       <button type="button" class="btn btn-danger" ng-click="salir()">Cancelar</button>
 
                   </div>
+                  <div ng-show="!dejarver">
+                        <table class="table table-hover table-dark">
+                              <thead> <th>Participantes</th> <th>Preguntas</th></thead>
+                                   <tbody> 
+                                        <tr  ng-repeat="p in pruebas">
+                                          <th scope="row">{{p.rowid}}</th>
+                                          <td></td>
+                                       </tr>
+                                   </tbody> 
+                        </table>
+                         <button type="button" class="btn btn-danger" name="boton3"  ng-click="ocultar()">Cerrar</button>
+                   </div>
+
              </div>
    </section>
    </div>

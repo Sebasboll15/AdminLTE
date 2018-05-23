@@ -1,30 +1,59 @@
 angular.module('olimpiada_boom')
 .controller('testCtrl', function($scope, ConexionServ, $filter){
-      $scope.mostrando= false;
+    $scope.mostrando= false;
+	$scope.dejarver= false;
+	$scope.boton3= true;
 	$scope.boton1= true;
+	
 	$scope.pruebas= {};
     
 
+   $scope.seleccionarPrueba = function(prueba){
 
 
-       $scope.traer_dato = function(){
+		consulta = "UPDATE pruebas SET actual=0";
+		ConexionServ.query(consulta, []).then (function(result){
+			
+			consulta = "UPDATE pruebas SET actual=1 WHERE rowid=?";
+			ConexionServ.query(consulta, [prueba.rowid]).then (function(result){
+				for (var i = 0; i < $scope.pruebas.length; i++) {
+					$scope.pruebas[i].actual = 0;
+				}
+				prueba.actual = 1;
+			}, function(error){
+				console.log('No se pudo establecer como actual', error);
+			})
 
-						consulta = "Select rowid, nombre, alias, dirigido, mostrar_respuesta, puntos_promedio, tiempo_preg, tiempo_exam from pruebas";
-						ConexionServ.query(consulta, []).then (function(result){
-							$scope.pruebas= result ;
-							console.log('Se trajo los datos con exito', result);
-						}, function(error){
-							console.log('No se pudo traer los datos', error);
+		}, function(error){
+			console.log('No se pudo quitar actuales', error);
 
-						})
+		})
+			
 			
 
 
 
-		};
+	};
+
+
+    $scope.traer_dato = function(){
+
+		consulta = "Select p.rowid, p.* from pruebas p";
+		ConexionServ.query(consulta, []).then (function(result){
+			$scope.pruebas= result ;
+			console.log('Se trajo los datos con exito', result);
+		}, function(error){
+			console.log('No se pudo traer los datos', error);
+
+		})
+			
+
+
+
+	};
 		
 
-             $scope.traer_dato();
+        $scope.traer_dato();
 
 
 
@@ -38,7 +67,15 @@ angular.module('olimpiada_boom')
 			$scope.salir= function(){
 				$scope.mostrando= false;
 			};
-	
+	 		
+	 		$scope.sesamo= function(){
+				$scope.dejarver= true;
+				$scope.boton3= false;
+			
+			};
+			$scope.ocultar= function(){
+				$scope.dejarver= false;
+			};
 	
   	$scope.insertarPrueba = function(crea){
 	         consulta = "Insert into pruebas(nombre, alias, dirigido, mostrar_respuesta, puntos_promedio, tiempo_preg, tiempo_exam) values(?,?,?,?,?,?,?)";

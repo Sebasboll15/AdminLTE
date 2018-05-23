@@ -18,8 +18,20 @@
 
         <div class="box box-primary" style="overflow: auto;">
           <table class="table table-hover table-dark">
-            <thead> <th>Id</th> <th>Nombres</th> <th>Apellidos</th> <th>Sexo</th> <th>Username</th> <th>Inscrito a:</th> <th>Tipo</th> <th>Opciones</th></thead>
+            <thead>
+             <th>Id</th>
+             <th>Nombres</th>
+             <th>Apellidos</th>
+             <th>Sexo</th> 
+             <th>Username</th>
+             <th>Inscrito a:</th>
+             <th>Tipo</th>
+             <th style="min-width: 100px;">Opciones</th>
+
+           </thead>
+             
              <tbody> 
+               
                <tr  ng-repeat="u in usuarios">
                     <th scope="row">{{u.rowid}}</th>
                     <td>
@@ -27,7 +39,8 @@
                       <span ng-show="u.editando"><input type="text" ng-model="u.nombres"></span>
 
                     </td>
-                    <td><span ng-show="!u.editando">{{u.apellidos}}</span>
+                    <td>
+                      <span ng-show="!u.editando">{{u.apellidos}}</span>
                       <span ng-show="u.editando"><input type="text" ng-model="u.apellidos"></span>
                      </td>
                     <td><span ng-show="!u.editando">{{u.sexo}}</span>
@@ -42,28 +55,46 @@
                         
                       </span>
                     </td>
-                    <td><span ng-show="!u.editando">{{u.username}}</span>
+                    <td>
+                      <span ng-show="!u.editando">{{u.username}}</span>
                       <span ng-show="u.editando"><input type="text" ng-model="u.username"></span>
                     </td>
-                    <td ><span ng-show="!u.editando">Prueba {{u.prueba_id}}</span>
+                    <td >
+                      <span ng-show="!u.editando">Prueba {{u.prueba_id}}</span>
                         
                     </td>
-                    <td><span ng-show="!u.editando">{{u.tipo}}</span>
+                    <td>
+                      <span ng-show="!u.editando">{{u.tipo}}</span>
                       <span ng-show="u.editando">
                         <label>
                             <input type="radio" ng-model="u.tipo" value="Admin">Admin
                           </label>
-                          <label>
+                          
+                        <label>
                             <input type="radio" ng-model="u.tipo" value="Usuario">Usuario
-                          </label>
-                    </td>
-                    <td style="padding: 0px;">
-                      <span ng-show="!u.editando">
-                        <button class="btn-sm btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_user(u.rowid)"></button> 
-                        <button ng-click="editarU(u)" class="btn-sm btn btn-info glyphicon glyphicon-pencil"></button> 
+                        </label>
                       </span>
-                       <button ng-click="editarUsuario(u)" ng-show="u.editando" class="btn-sm btn btn-info glyphicon glyphicon-ok"></button> 
-                        <button ng-click="abrirModal()" ng-show="u.editando" class="btn-sm btn btn-secondary ">Cambiar contraseña</button> 
+                    </td>
+                    
+                    <td style="padding: 0px;">
+                          
+
+                         
+                            <span ng-show="!u.editando">
+                               <div class="btn-group">
+                                  
+                                  <button class="btn-xs btn btn-danger glyphicon glyphicon-remove-sign" uib-tooltip="Eliminar"  ng-click="eliminar_user(u.rowid)"></button> 
+                                  
+                                  <button ng-click="editarU(u)"  uib-tooltip="Editar" class="btn-xs btn btn-info glyphicon glyphicon-pencil"></button> 
+                               
+                               </div>
+                            </span>
+                             <div class="btn-group">
+                                 <button ng-click="editarUsuario(u)" ng-show="u.editando" class="btn-xs btn btn-info glyphicon glyphicon-ok"></button> 
+                                 <button ng-click="abrirModal(u)" ng-show="u.editando" class="btn-xs btn btn-secondary glyphicon glyphicon-edit "  uib-tooltip="Cambiar contraseña"></button> 
+                             </div>
+                    
+
                     </td>
                 
                </tr>

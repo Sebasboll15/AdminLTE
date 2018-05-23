@@ -52,15 +52,20 @@ angular.module('olimpiada_boom')
 
 
 
-	$scope.abrirModal = function () {
+	$scope.abrirModal = function (usuario) {
 
     	var modalInstance = $uibModal.open({
-	      templateUrl: 'dist/templates/modalUsuario.html',
-	      controller: 'ModalUCtrl'
+			templateUrl: 'dist/templates/modalUsuario.html',
+			controller: 'ModalUCtrl',
+			resolve: {
+			    usuario: function () {
+			    	return usuario;
+			    }
+			},
       	})
             
-      	modalInstance.result.then(function (usuariores) {
-	     
+  		modalInstance.result.then(function (usuariores) {
+	     console.log(usuariores);
 	    }, function () {
 	      console.log();
 	    });
