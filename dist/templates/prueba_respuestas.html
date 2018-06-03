@@ -1,0 +1,63 @@
+
+<!-- Main content -->
+   
+  <section class="content">
+
+  <!-- Main row -->
+  <div class="row">
+    <!-- Left col -->
+    <section class="col-lg-12 connectedSortable">
+
+      <!-- TO DO List -->
+      <div class="box box-primary">
+        <div class="box-header">
+
+          <h3>
+              Pregunta {{prueba_preguntas[0].rowid }}
+          </h3>
+
+
+                      
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+       
+          <ul class="todo-list">
+            <li>
+             
+             
+               <h4>{{prueba_preguntas[0].definicion}}</h4>
+            
+                <div class="row">
+                   <div class="col-sm-12"> 
+                      <div class="col-sm-3 ">  <span class="label label-default" ng-model="llevar.opc_a" ng-click= pasar()>A.     {{prueba_preguntas[0].opc_a}}  </span> 
+                      </div>  
+                        <div class="col-sm-3 "><span ng-model="llevar.opc_b" ng-click= pasar()  class="label label-default">B. {{prueba_preguntas[0].opc_b}}</span></div>
+                        <div class="col-sm-3 "><span ng-model="llevar.opc_c" ng-click= pasar() class="label label-default">C. {{prueba_preguntas[0].opc_c}}</span></div>
+                        <div class="col-sm-3 "><span ng-model="llevar.opc_d" ng-click= pasar() class="label label-default">D. {{prueba_preguntas[0].opc_c}}</span></div>
+                   </div>
+                </div>
+
+              <!-- Emphasis label -->
+              
+              <!-- General tools such as edit or delete-->
+              <div class="tools">
+                  
+              </div>
+            </li>
+            
+          </ul>
+        </div>
+        <!-- /.box-body -->
+        
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- right col -->
+  </div>
+  <!-- /.row (main row) -->
+     
+ 
+</section>
+

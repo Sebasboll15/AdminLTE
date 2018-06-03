@@ -6,6 +6,7 @@ angular.module('olimpiada_boom')
 	$scope.boton1= true;
 	
 	$scope.pruebas= {};
+	$scope.preguntas= {};
     
 
    $scope.seleccionarPrueba = function(prueba){
@@ -68,10 +69,20 @@ angular.module('olimpiada_boom')
 				$scope.mostrando= false;
 			};
 	 		
-	 		$scope.sesamo= function(){
+	 		$scope.verDetallesPrueba= function(id){
 				$scope.dejarver= true;
 				$scope.boton3= false;
-			
+			    
+				consulta = "Select u.nombres, u.apellidos, u.rowid from usuarios u INNER JOIN pruebas p ON p.rowid= u.prueba_id";
+				ConexionServ.query(consulta, []).then (function(result){
+			        console.log( result);
+                
+			    })
+			    consulta = "Select  p.tipo, p.rowid from preguntas p INNER JOIN pruebas prueba ON prueba.rowid= p.prueba_id";
+				ConexionServ.query(consulta, []).then (function(result){
+                     $scope.preguntas = result ;
+			   			 console.log(  $scope.preguntas);
+			   })			     
 			};
 			$scope.ocultar= function(){
 				$scope.dejarver= false;
@@ -133,6 +144,17 @@ angular.module('olimpiada_boom')
 	         })
                    
 
-         }
-      
+         };
+
+    
+     $scope.seleccionarUsuarios = function(usu){
+
+
+		consulta = "Select from usuarios where actual=0";
+		ConexionServ.query(consulta, []).then (function(result){
+	   })		     
+     }; 
+	
+   
+	
 	});

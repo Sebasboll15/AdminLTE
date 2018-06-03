@@ -54,7 +54,15 @@ angular.module('olimpiada_boom',  [
 			url: '/asks',
 			controller:'askCtrl',
 			templateUrl: 'dist/templates/preguntas.html'
+		})
+
+		.state('main.prueba_respuesta',{
+			name: 'Prueba',
+			url: '/Prueba',
+			controller:'Prueba_respuestasCtrl',
+			templateUrl: 'dist/templates/prueba_respuestas.html'
 		});
+
 
 	 $urlRouterProvider.otherwise('/login');
 }]);

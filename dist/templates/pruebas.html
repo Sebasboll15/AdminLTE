@@ -5,7 +5,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Olimpiadas2019</li>
+    <li class="active">Pruebas</li>
   </ol>
 </section>
 
@@ -107,7 +107,7 @@
                             
                             <button ng-show="p.actual==1" type="button" uib-tooltip="Seleccionada" class="btn-xs btn glyphicon glyphicon-thumbs-up"></button> 
                             
-                            <button type="button" ng-click="verDetallesPrueba(p)" uib-tooltip="Ver Participantes"  class="btn btn-xs btn-default glyphicon glyphicon-menu-right"></button>
+                            <button type="button" ng-click="verDetallesPrueba(p)" uib-tooltip="Ver Participantes y Preguntas"  class="btn btn-xs btn-default glyphicon glyphicon-menu-right"></button>
 
                           </div>
                       </span>
@@ -238,13 +238,24 @@
                       <button type="button" class="btn btn-danger" ng-click="salir()">Cancelar</button>
 
                   </div>
-                  <div ng-show="!dejarver">
+                  <div ng-show="dejarver">
                         <table class="table table-hover table-dark">
-                              <thead> <th>Participantes</th> <th>Preguntas</th></thead>
+                              <thead>
+                               <th>Participantes</th>
+                              </thead>
                                    <tbody> 
-                                        <tr  ng-repeat="p in pruebas">
-                                          <th scope="row">{{p.rowid}}</th>
-                                          <td></td>
+                                        <tr  ng-repeat="usuario in usuarios">
+                                          <td>{{usuario.nombres}} {{usuario.apellidos}}</td>
+                                       </tr>
+                                   </tbody> 
+                        </table>
+                         <table class="table table-hover table-dark">
+                              <thead>
+                               <th>Preguntas</th>
+                              </thead>
+                                   <tbody> 
+                                          <tr  ng-repeat="pregunta in preguntas">
+                                          <td>Pregunta N°{{pregunta.rowid}} Tipo: {{pregunta.tipo}}</td>
                                        </tr>
                                    </tbody> 
                         </table>

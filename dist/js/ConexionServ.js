@@ -13,13 +13,13 @@ angular.module('olimpiada_boom')
                 "sexo varchar(100)  NOT NULL," +
                 "username varchar(100)  NOT NULL collate nocase," +
                 "password varchar(100)  NOT NULL collate nocase," +
-                "prueba_id varchar(100)  DEFAULT NULL collate nocase," +
+                "prueba_id integer(100)  DEFAULT NULL," +
                 "tipo integer DEFAULT '0')";
 
 sqlPreguntas = "CREATE TABLE IF NOT EXISTS preguntas (id integer," +
                 "definicion varchar(300)  NOT NULL collate nocase," +
                 "tipo varchar(100)  NOT NULL collate nocase," +
-                "prueba_id varchar(100)  DEFAULT NULL collate nocase," +
+                "prueba_id integer(100)  DEFAULT NULL," +
                 "opc_a varchar(100)  DEFAULT NULL collate nocase," +
                 "opc_b varchar(100)  DEFAULT NULL collate nocase," +
                 "opc_c varchar(100)  DEFAULT NULL collate nocase," +
@@ -33,8 +33,8 @@ sqlPreguntas = "CREATE TABLE IF NOT EXISTS preguntas (id integer," +
                 "puntos varchar(100)  DEFAULT NULL collate nocase)";
 
 sqlRespuestas = "CREATE TABLE IF NOT EXISTS respuestas (id integer," +
-                "preg_id varchar(100)  NOT NULL collate nocase," +
-                "usuario_id varchar(100)  DEFAULT NULL collate nocase," +
+                "preg_id integer(100)  NOT NULL," +
+                "usuario_id integer(100)  DEFAULT NULL," +
                 "opcion_elegida varchar(100)  NOT NULL," +
                 "correcta varchar(100)  NOT NULL collate nocase," +
                 "duracion varchar(100)  NOT NULL collate nocase)";       
@@ -60,7 +60,6 @@ sqlRespuestas = "CREATE TABLE IF NOT EXISTS respuestas (id integer," +
               console.log(tx);
             
                 tx.executeSql(sqlUsuarios, [], function (tx, result) {
-                    console.log(' Tabla users creada');
                     defered.resolve('Hasta tabla users creada');
                 }, function(tx,error){
                     console.log("Tabla users NO se pudo crear", error.message);
@@ -68,21 +67,18 @@ sqlRespuestas = "CREATE TABLE IF NOT EXISTS respuestas (id integer," +
                 
 
                  tx.executeSql(sqlPreguntas, [], function (tx, result) {
-                    console.log(' Tabla de preguntas creada');
                     defered.resolve('Hasta tabla preguntas creada');
                 }, function(tx,error){
                     console.log("Tabla preguntas NO se pudo crear", error.message);
                 })
                  
                  tx.executeSql(sqlRespuestas, [], function (tx, result) {
-                    console.log(' Tabla de respuestas creada');
                     defered.resolve('Hasta tabla respuestas creada');
                 }, function(tx,error){
                     console.log("Tabla respuestas NO se pudo crear", error.message);
                 })
 
                    tx.executeSql(sqlPruebas, [], function (tx, result) {
-                    console.log(' Tabla de pruebas creada');
                     defered.resolve('Hasta tabla pruebas creada');
                 }, function(tx,error){
                     console.log("Tabla preguntas NO se pudo crear", error.message);

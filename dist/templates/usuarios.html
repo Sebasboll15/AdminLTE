@@ -104,92 +104,122 @@
           <button type="button" class="btn btn-info" name="boton1" ng-show="!mostrando" ng-click="mostrar()">Crear</button>
             
                   <div  ng-show="mostrando">
-                    <h2>Crea tus usuarios</h2>
+                              <h2>Crea tus usuarios</h2>
 
-                    <div class="row">
-                      <div class="row">
-                        <div class="col-sm-3">
-                         <label>Nombres:</label> 
-                        </div>
-                        <div class="col-sm-3">
-                         <input type="text" ng-model="crea.nombres">
-                        </div>
-                      </div>
-                       <div class="row">
-                        <div class="col-sm-3">
-                         <label>Apellidos:</label> 
-                        </div>
-                        <div class="col-sm-3">
-                         <input type="text" ng-model="crea.apellidos">
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-sm-3">
-                         <label>Sexo:</label> 
-                        </div>
-                        
-                      
-                          <div class="col-sm-4">
-                           <label>
-                            <input type="radio" ng-model="crea.sexo" value="Masculino">Masculino
-                          </label>
-                           </div>
-                          <div class="col-sm-5">
-                          <label>
-                            <input type="radio" ng-model="crea.sexo" value="Femenino">Femenino
-                          </label>
-                          </div>
-                    
-                      </div>
-                      </div>
-                       <div class="row">
-                        <div class="col-sm-3">
-                         <label>Username:</label> 
-                        </div>
-                        <div class="col-sm-3">
-                         <input type="text" ng-model="crea.username">
-                        </div>
-                      </div>
-                       <div class="row">
-                        <div class="col-sm-3">
-                         <label>Password:</label> 
-                        </div>
-                        <div class="col-sm-3">
-                         <input type="password"  ng-model="crea.password">
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-sm-3">
-                         <label>Confirme Password:</label> 
-                        </div>
-                        <div class="col-sm-3">
-                         <input type="password" ng-model="crea.password">
-                        </div>
-                      </div>
-                       <div class="row">
-                        <div class="col-sm-3">
-                         <label>Tipo:</label> 
-                        </div>
-                        
-                      
-                          <div class="col-sm-4">
-                           <label>
-                            <input type="radio" ng-model="crea.tipo" value="Admin">Admin
-                          </label>
-                           </div>
-                          <div class="col-sm-5">
-                          <label>
-                            <input type="radio" ng-model="crea.tipo" value="Usuario">Usuario
-                          </label>
-                          </div>
-                             <div class="row">
-                       
-                    
-                      <button type="button" class="btn btn-info" ng-click="insertarUsuarios(crea)">Insertar</button>
-                      <button type="button" class="btn btn-danger" ng-click="salir()">Cancelar</button>
+                              <div class="row">
+                                <div class="col-sm-12">
+                                        <div class="row">
+                                              <div class="col-sm-3">
+                                               <label>Nombres:</label> 
+                                              </div>
+                                              <div class="col-sm-3">
+                                               <input type="text" ng-model="crea.nombres">
+                                              </div>
+                                        </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                          <label>Apellidos:</label> 
+                                        </div>
+                                        <div class="col-sm-3">
+                                          <input type="text" ng-model="crea.apellidos">
+                                        </div>
+                                    </div>
 
-                  </div>
-             </div>
+                                    <div class="row">
+                                        
+                                          <div class="col-sm-3">
+                                            <label>Sexo:</label> 
+                                          </div>
+                                            
+                                          <div class="col-sm-4">
+                                              
+                                              <label>
+                                                  <input type="radio" ng-model="crea.sexo" value="Masculino">Masculino
+                                            </label>
+                                          
+                                          </div>
+                                            
+                                                
+                                          <div class="col-sm-5">
+                                              
+                                              <label>
+                                                <input type="radio" ng-model="crea.sexo" value="Femenino">Femenino
+                                              </label>
+                                          
+                                          </div>
+                                    
+                                    </div>
+                             </div>
+                          </div>
+                          
+                          <div class="row">
+                                  
+                                  <div class="col-sm-3">
+                                    <label>Username:</label> 
+                                  </div>
+                                  
+                                  <div class="col-sm-3">
+                                    <input type="text" ng-model="crea.username">
+                                  </div>
+                          </div>
+                                 
+                                 <div class="row">
+                                    
+                                    <div class="col-sm-3">
+                                       <label>Password:</label> 
+                                    </div>
+                                  
+                                  <div class="col-sm-3">
+                                   <input type="password"  ng-model="crea.password">
+                                  </div>
+                                
+                                </div>
+                                
+                                <div class="row">
+                                  
+                                  <div class="col-sm-3">
+                                   <label>Confirme Password:</label> 
+                                  </div>
+                                  
+                                  <div class="col-sm-3">
+                                   <input type="password" ng-model="crea.password">
+                                  </div>
+                                
+                                </div>
+                                 
+                                 <div class="row">
+                                  
+                                      <div class="col-sm-3">
+                                       <label>Tipo:</label> 
+                                      </div>
+                                      
+                                    
+                                        <div class="col-sm-4">
+                                         
+                                           <label>
+                                            <input type="radio" ng-model="crea.tipo" value="Admin">Admin
+                                          </label>
+                                         
+                                         </div>
+                                        
+                                        <div class="col-sm-5">
+                                          
+                                          <label>
+                                            <input type="radio" ng-model="crea.tipo" value="Usuario">Usuario
+                                          </label>
+                                        
+                                        </div>
+                                       
+                                  </div>
+                                 
+                              <div class="row">
+                                  
+                                  <button type="button" class="btn btn-info" ng-click="insertarUsuarios(crea)">Insertar</button>
+                                  <button type="button" class="btn btn-danger" ng-click="salir()">Cancelar</button>
+
+                             </div>
+                      </div>
    </section>
    </div>
 

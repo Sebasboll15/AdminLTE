@@ -1,30 +1,30 @@
 angular.module('olimpiada_boom')
 
-.controller('DashboardCtrl', function(ConexionServ, $scope, AuthServ){
+.controller('DashboardCtrl', function(ConexionServ, $scope, AuthServ, $state){
 
   ConexionServ.createTables();
 	
 	AuthServ.verificar_user_logueado().then(function(r){
 		$scope.USER = r;
-		console.log($scope.USER)
-	})
-		
 
-  $scope.pregunta = {};
-  $scope.meses = [
-  	{mes: 'Enero'},
-  	{mes: 'Febrero'},
-  	{mes: 'Marzo'},
-  	{mes: 'Abril'}
-  ]
+		if ($scope.USER.tipo == 'Usuario') {
+			$state.go('main.prueba_respuesta');
+		}else {
+			$state.go('main');
+		}
+		
+	})
+	
+    
+
+
+  
          
 
          $scope.traer_dato = function(){
 			consulta = "Select *, rowid from pruebas";
 				ConexionServ.query(consulta, []).then (function(result){
 					$scope.pruebas= result ;
-
-					console.log('Se trajo los datos con exito', result);
 				}, function(error){
 					console.log('No se pudo traer los datos', error);
 
@@ -35,8 +35,6 @@ angular.module('olimpiada_boom')
 				consulta = "Select *, rowid from usuarios";
 				ConexionServ.query(consulta, []).then (function(result){
 					$scope.usuarios= result ;
-
-					console.log('Se trajo los datos con exito', result);
 				}, function(error){
 					console.log('No se pudo traer los datos', error);
 
