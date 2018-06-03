@@ -5,7 +5,7 @@ angular.module('olimpiada_boom')
 	$scope.boton3= true;
 	$scope.boton1= true;
 	
-	$scope.pruebas= {};
+	$scope.pruebas= [];
 	$scope.preguntas= {};
     
 

@@ -13,7 +13,7 @@
         <div class="box-header">
 
           <h3>
-              Pregunta {{prueba_preguntas[0].rowid }}
+              Pregunta {{preguntas[indice_preg].rowid }}
           </h3>
 
 
@@ -26,15 +26,30 @@
             <li>
              
              
-               <h4>{{prueba_preguntas[0].definicion}}</h4>
+               <h4>{{preguntas[indice_preg].definicion}}</h4>
             
                 <div class="row">
                    <div class="col-sm-12"> 
-                      <div class="col-sm-3 ">  <span class="label label-default" ng-model="llevar.opc_a" ng-click= pasar()>A.     {{prueba_preguntas[0].opc_a}}  </span> 
+                      <div class="col-sm-3 ">  
+                        <span class="opcion-pregunta label label-default" 
+                         ng-click="seleccionarOpcion('A')">A.     {{preguntas[indice_preg].opc_a}}  </span> 
                       </div>  
-                        <div class="col-sm-3 "><span ng-model="llevar.opc_b" ng-click= pasar()  class="label label-default">B. {{prueba_preguntas[0].opc_b}}</span></div>
-                        <div class="col-sm-3 "><span ng-model="llevar.opc_c" ng-click= pasar() class="label label-default">C. {{prueba_preguntas[0].opc_c}}</span></div>
-                        <div class="col-sm-3 "><span ng-model="llevar.opc_d" ng-click= pasar() class="label label-default">D. {{prueba_preguntas[0].opc_c}}</span></div>
+
+                        <div class="col-sm-3 ">
+                          <span ng-model="llevar.opc_b" 
+                            ng-click="seleccionarOpcion('B')" class="opcion-pregunta label label-default">B. {{preguntas[indice_preg].opc_b}}</span>
+                        </div>
+
+                        <div class="col-sm-3 ">
+                          <span ng-model="llevar.opc_c" 
+                            ng-click="seleccionarOpcion('C')" class="opcion-pregunta label label-default">C. {{preguntas[indice_preg].opc_c}}</span>
+                        </div>
+
+                        <div class="col-sm-3 ">
+                          <span ng-model="llevar.opc_d" 
+                            ng-click="seleccionarOpcion('D')" class="opcion-pregunta label label-default">D. {{preguntas[indice_preg].opc_c}}</span>
+                        </div>
+
                    </div>
                 </div>
 

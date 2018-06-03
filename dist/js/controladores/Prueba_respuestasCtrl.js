@@ -5,6 +5,7 @@ angular.module('olimpiada_boom')
 	ConexionServ.createTables();
 	$scope.usuario= USER ;
     $scope.respuesta_llevada={};
+    $scope.indice_preg = 0;
 
   
 	consulta = "Select p.*, p.rowid from pruebas p WHERE p.rowid = ?";
@@ -13,9 +14,9 @@ angular.module('olimpiada_boom')
 
 		consulta = "Select p.* , p.rowid from preguntas p where p.prueba_id=? ";
 		ConexionServ.query(consulta, [$scope.prueba.rowid]).then (function(result){
-			$scope.prueba_preguntas = result ;
+			$scope.preguntas = result ;
 			
-			console.log('Se trajo los datos con exito', $scope.prueba_preguntas);
+			console.log('Se trajo los datos con exito', $scope.preguntas);
 		}, function(error){
 			console.log('No se pudo traer los datos', error);
 
@@ -29,24 +30,37 @@ angular.module('olimpiada_boom')
 	
 	$scope.traer_dato();
 
-    $scope.guardar = function(llevar) {
+    $scope.seleccionarOpcion = function(opcion) {
+
+    	correcta = 0;
+    	if ($scope.preguntas[$scope.indice_preg].correcta == opcion ) {
+    		correcta = 1;
+    	}
          
-    	 consulta = "Insert into respuestas(pregunta) values(?)";
-	         datos= [llevar.pregunta];
-	         ConexionServ.query(consulta, datos).then (function(result){
-               $scope.respuestas= result ;
-                $scope.traer_dato();
- 
-                console.log('Se insertaron los datos con exito', result);
+    	consulta = "Insert into respuestas(preg_id, usuario_id, opcion_elegida, correcta, duracion) values(?,?,?,?,?)";
+	    datos = [$scope.preguntas[$scope.indice_preg].rowid, USER.nombres + USER.apellidos, opcion, correcta, 0];
+	    
+	    ConexionServ.query(consulta, datos).then (function(result){
+        	
+        	if ($scope.prueba.dirigido == 1) {
+
+        	}else{
+
+        		$scope.indice_preg = $scope.indice_preg + 1;
+
+        	}
+
+        	if ($scope.indice_preg == $scope.preguntas.length) {
+        	
+        	 alert('Haz terminado la prueba');
+        	  AuthServ.cerrar_sesion();
+        	}
+        	
                 
-	         }, function(error){
-	           console.log('No se pudo insertar los datos', error);
+        }, function(error){
+           console.log('No se pudo insertar los datos', error);
 
-	         })
-
-         $scope.respuesta_llevada= llevar;
-        
-        if ($scope.respuesta_llevada.opc_a == '') {}
+        })
 
 
     };    	
