@@ -15,7 +15,18 @@ angular.module('olimpiada_boom')
 		
 	})
 	
-    
+    $scope.traer_puestos = function(){
+
+    	MySocket.emit('necesito_puestos');	
+
+    }
+
+    MySocket.on('toma_los_puestos', function(datos){
+    	console.log(datos);
+    })
+	
+
+
 
 
   

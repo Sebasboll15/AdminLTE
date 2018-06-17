@@ -243,15 +243,17 @@
 
           <h3 class="box-title">Lista</h3>
 
+          <input type="button" name="" value="Puestos" ng-click="traer_puestos()">
 
-                          <ui-select ng-model="buscar.prueba" style="width: 100%;" theme="bootstrap">
-                            <ui-select-match placeholder="prueba">
-                              <span ng-bind="$select.selected.prueba"></span>
-                            </ui-select-match>
-                            <ui-select-choices repeat="item in pruebas |  filter: $select.search track by $index">
-                              <span ng-bind-html="item.prueba | highlight: $select.search"></span>
-                            </ui-select-choices>
-                          </ui-select>
+
+          <ui-select ng-model="buscar.prueba" style="width: 100%;" theme="bootstrap">
+            <ui-select-match placeholder="prueba">
+              <span ng-bind="$select.selected.prueba"></span>
+            </ui-select-match>
+            <ui-select-choices repeat="item in pruebas |  filter: $select.search track by $index">
+              <span ng-bind-html="item.prueba | highlight: $select.search"></span>
+            </ui-select-choices>
+          </ui-select>
                           
 
 
