@@ -1,8 +1,8 @@
 angular.module('olimpiada_boom')
 
-.controller('DashboardCtrl', function(ConexionServ, $scope, AuthServ, $state){
+.controller('DashboardCtrl', function(ConexionServ, $scope, AuthServ, $state, MySocket){
 
-  ConexionServ.createTables();
+	ConexionServ.createTables();
 	
 	AuthServ.verificar_user_logueado().then(function(r){
 		$scope.USER = r;

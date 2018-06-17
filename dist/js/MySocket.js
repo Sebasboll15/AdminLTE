@@ -8,6 +8,10 @@ angular.module('olimpiada_boom')
 	// Verifico que no tenga puerto asignado
 	dominio 	= location.hostname;
 
+	if (localStorage.servidor) {
+		dominio 	= localStorage.servidor;
+	}
+
 
 	console.log(dominio);
 

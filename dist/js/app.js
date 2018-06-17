@@ -42,6 +42,14 @@ angular.module('olimpiada_boom',  [
 			controller:'answerCtrl',
 			templateUrl: 'dist/templates/respuestas.html'
 		})
+		
+		.state('main.control',{
+			name: 'control',
+			url: '/control',
+			controller:'ControlCtrl',
+			templateUrl: 'dist/templates/control.html'
+		})
+		
 		.state('main.test',{
 			name: 'test',
 			url: '/tests',
