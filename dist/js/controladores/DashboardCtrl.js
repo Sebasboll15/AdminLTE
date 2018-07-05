@@ -12,6 +12,12 @@ angular.module('olimpiada_boom')
 		}else {
 			$state.go('main');
 		}
+
+
+	    MySocket.emit('toma_mis_datos', {usuario: $scope.USER}, function(datos){
+	    	console.log('Ya mandé los datos');
+	    })
+		
 		
 	})
 	

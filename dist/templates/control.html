@@ -19,9 +19,21 @@
         <div class="box box-primary" style="overflow: auto;">
             
             <div>
-                
+               <div class="panel panel-default">
+                    <div class="panel-body">
+                      <h4>Conectados</h4>
+                    </div>
+                    <div class="panel-footer">Pie del panel</div>
+                  </div> 
             </div>
             
+            <div class="">
+              <div class="panel panel-success" ng-repeat="cliente in clientes" >
+                  <h5>{{cliente.id}}</h5> 
+                   
+              </div>
+
+            </div>
         </div>
 
    </section>

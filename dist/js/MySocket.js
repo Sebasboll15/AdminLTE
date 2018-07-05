@@ -20,6 +20,7 @@ angular.module('olimpiada_boom')
 
 
 
+
 	socket.on('te_conectaste', function(data){
 
 		if (!localStorage.getItem('registered_boolean')){
