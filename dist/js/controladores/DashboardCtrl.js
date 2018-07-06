@@ -21,6 +21,8 @@ angular.module('olimpiada_boom')
 		
 	})
 	
+     
+
     $scope.traer_puestos = function(){
 
     	MySocket.emit('necesito_puestos');	
@@ -85,7 +87,7 @@ angular.module('olimpiada_boom')
               
 
              AuthServ.cerrar_sesion();
-
+              
 
 
               };

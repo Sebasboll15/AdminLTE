@@ -13,5 +13,14 @@ angular.module('olimpiada_boom')
           $scope.clientes = res ;
            console.log( $scope.clientes);
     })
+     
+    MySocket.on('tomen_los_datos', function(datos){
+       
+          $scope.clientes = res ;
+           console.log( $scope.clientes);
+    })
+    
+
+
 
 });
