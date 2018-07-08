@@ -1,16 +1,15 @@
 angular.module('olimpiada_boom')
 
 
-.controller('usersCtrl', function($scope, ConexionServ, $filter, $uibModal){
+.controller('usersCtrl', function($scope, ConexionServ, $http, $filter, $uibModal){
 	$scope.mostrando= false;
 	$scope.boton1= true;
 	$scope.usuarios= {};
     
     $scope.traer_datos = function(){
 
-		consulta = "Select *,rowid from usuarios";
-		ConexionServ.query(consulta, []).then (function(result){
-			$scope.usuarios= result ;
+		$http.get('::usuarios').then (function(result){
+			$scope.usuarios = result.data ;
 			console.log('Se trajo los datos con exito', result);
 		}, function(error){
 			console.log('No se pudo traer los datos', error);
@@ -99,18 +98,17 @@ angular.module('olimpiada_boom')
      
 
    };
-    $scope.eliminar_user = function(usuario){
-	         consulta = "delete from usuarios where rowid = ? ";
-	         ConexionServ.query(consulta, [usuario]).then (function(result){
-                console.log('Se borraron los datos con exito', result);
-                  $scope.traer_datos();
-	         }, function(error){
-	           console.log('No se pudo borrarlos datos', error);
+    $scope.eliminar_user = function(rowid){
 
-	         })
-                  
+		$http.delete('::usuarios/eliminar', {params: { id: rowid } }).then (function(result){
+			console.log('Se borraron los datos con exito', result);
+            $scope.traer_datos();
+		}, function(error){
+			console.log('No se pudo borrarlos datos', error);
 
-     };
+		})
+
+    };
   
 
 

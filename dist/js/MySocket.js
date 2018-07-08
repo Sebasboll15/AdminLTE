@@ -16,7 +16,7 @@ angular.module('olimpiada_boom')
 	console.log(dominio);
 
 	//url 		= 'ws://' + dominio + ':8787';
-	socket = io.connect(dominio + ':3000');
+	socket = io.connect(dominio + ':8787');
 
 
 

@@ -6,7 +6,29 @@ angular.module('olimpiada_boom',  [
 ])
 
 
-.config(['$stateProvider','$urlRouterProvider', function ($stateProvider, $urlRouterProvider){
+.config(['$stateProvider','$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider){
+
+	$httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+
+	$httpProvider.interceptors.push(function($q)
+	{
+		return {
+			'request': function(config){
+				explotado = config.url.split('::');
+				if(explotado.length > 1){
+					config.url = window.location.protocol + '//' + window.location.hostname + ':8787/api/' + explotado[1];
+				}else{
+					explotado = config.url.split('==');
+					if (explotado.length > 1)
+						config.url = window.location.host + explotado[1];
+				}
+				//console.log(config.url);
+				return config;
+			}
+		}
+	});
 
 
 	 $stateProvider

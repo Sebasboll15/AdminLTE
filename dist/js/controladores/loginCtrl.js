@@ -86,7 +86,7 @@ angular.module('olimpiada_boom')
 			        if (result.length == 0) {
 					
 				           	consulta = "INSERT INTO preguntas(definicion, tipo, prueba_id, opc_a, opc_b, opc_c, opc_d, correcta) VALUES(?,?,?,?,?,?,?,?) ";
-				           	ConexionServ.query(consulta, ['´De donde era Simon Bolivar?', 'Múltiple', 1,  'Colombia', 'Venezuela', 'Francia', 'España', 'B']).then(function(result) {
+				           	ConexionServ.query(consulta, ['¿De donde era Simon Bolivar?', 'Múltiple', 1,  'Colombia', 'Venezuela', 'Francia', 'España', 'B']).then(function(result) {
 				
 						}, function(tx) {
 							console.log("Dato original no insertado", tx);
