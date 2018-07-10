@@ -35,10 +35,9 @@ angular.module('olimpiada_boom')
   			alert('Las dos contraseñas no son iguales')
   			return;
   		}
-	     consulta = "Insert into usuarios(nombres, apellidos, sexo, username, password, prueba_id, tipo) values(?,?,?,?,?,?,?)";
-	     datos= [crea.nombres, crea.apellidos, crea.sexo, crea.username, crea.password, crea.prueba_id, crea.tipo ];
-	     ConexionServ.query(consulta, datos).then (function(result){
-	       $scope.usuarios= result ;
+	    
+	     $http.get('::usuarios/insertar', {params: { rowid: crea.rowid, nombres: crea.nombres, apellidos: crea.apellidos, sexo: crea.sexo, username: crea.username, prueba_id: crea.prueba_id, tipo: crea.tipo  }  }).then (function(result){
+	       $scope.usuarios= result.data ;
 	       $scope.traer_datos();
 	        console.log('Se insertaron los datos con exito', result);
 	        
@@ -82,12 +81,10 @@ angular.module('olimpiada_boom')
     
     };
     $scope.editarUsuario = function(cambia){
-	         consulta = "update  usuarios set nombres=?, apellidos=?, sexo=?, username=?, prueba_id=?, tipo=? where rowid=?";
-	         datos= [cambia.nombres, cambia.apellidos, cambia.sexo, cambia.username, cambia.prueba_id, cambia.tipo, cambia.rowid ];
-	         ConexionServ.query(consulta, datos).then (function(result){
-                $scope.traer_datos();
+	        
+	         $http.get('::usuarios/editar',  {params: { rowid: cambia.rowid, nombres: cambia.nombres, apellidos: cambia.apellidos, sexo: cambia.sexo, username: cambia.username, prueba_id: cambia.prueba_id, tipo: cambia.tipo  } }).then (function(result){
                 console.log('Se actualizaron los datos con exito', result);
-                
+                 $scope.traer_datos();
 	         }, function(error){
 	           console.log('No se pudo actualizar los datos', error);
 

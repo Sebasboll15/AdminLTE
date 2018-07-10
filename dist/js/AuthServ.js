@@ -38,19 +38,14 @@ angular.module('olimpiada_boom')
         loguear: function(datos){
             var defered = $q.defer();
             
-            consulta_user = 'SELECT u.rowid, u.id, u.nombres, u.apellidos, u.tipo, u.username, u.sexo, prueba_id  '+
-                            'FROM usuarios u '+
-                            'WHERE  ';
 
-            ConexionServ.query(consulta_user+' username=? and password=? ', [datos.username, datos.password]).then(function(result){
-                
-                if (result.length > 0) {
-                    localStorage.logueado   = true
-                    localStorage.USER       = JSON.stringify(result[0]);
-                    defered.resolve(result[0]);
-                }else{
-                    defered.reject('DATOS INVÁLIDOS')
-                }
+            $http.post('::login/login', {username: datos.username, password: datos.password}).then(function(result){
+                usuario                 = result.data
+                localStorage.logueado   = true
+                localStorage.xtoken     = usuario.remember_token;
+                delete usuario.remember_token;
+                localStorage.USER       = JSON.stringify(usuario);
+                defered.resolve('Logueado');
                 
             }, function(){
                 console.log('Error logueando');

@@ -1,6 +1,6 @@
 angular.module('olimpiada_boom')
 
-  .controller('loginCtrl', function($scope,  $state, ConexionServ, $filter, $uibModal, AuthServ){
+  .controller('loginCtrl', function($scope,  $state, ConexionServ, $http, $filter, $uibModal, AuthServ){
        $scope.user = {username: 'jorge', password: '123'}
     
     if (localStorage.servidor) {
@@ -23,6 +23,7 @@ angular.module('olimpiada_boom')
     $scope.iniciar = function(user){
 
         AuthServ.loguear(user).then(function(){
+        	console.log('sdfg');
             $state.go('main');
         }, function(){
             alert('Datos incorrectos');
