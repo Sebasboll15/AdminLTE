@@ -1,26 +1,27 @@
 angular.module('olimpiada_boom')
 
 
-.controller('askCtrl', function($scope, ConexionServ, $filter){
+.controller('askCtrl', function($scope, ConexionServ, $filter, $http){
    $scope.mostrando = false;
 	$scope.boton1 	= true;
 	$scope.usuarios	= {};
 	$scope.preg_nueva 	= {};
 	$scope.preg_edit 	= {};
-
+	 $scope.preguntas = {};
 	
         $scope.traer_datos= function(){
 
 
-					consulta = "Select p.* , p.rowid, n.alias from preguntas p INNER JOIN pruebas n ON p.prueba_id= n.rowid";
-					ConexionServ.query(consulta, []).then (function(result){
-						$scope.preguntas= result ;
-						console.log('Se trajo los datos con exito', result);
-					}, function(error){
-						console.log('No se pudo traer los datos', error);
+			$http.get('::preguntas').then (function(result){
+				
+				$scope.preguntas = result.data ;
+				console.log(result);
+				console.log('Se trajo los datos con exito', result);
+			}, function(error){
+				console.log('No se pudo traer los datos', error);
 
-					})
-
+			})
+			
         };
          $scope.traer_datos();
 
