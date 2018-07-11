@@ -36,8 +36,8 @@ angular.module('olimpiada_boom')
   			return;
   		}
 	    
-	     $http.get('::usuarios/insertar', {params: { rowid: crea.rowid, nombres: crea.nombres, apellidos: crea.apellidos, sexo: crea.sexo, username: crea.username, prueba_id: crea.prueba_id, tipo: crea.tipo  }  }).then (function(result){
-	       $scope.usuarios= result.data ;
+	     $http.get('::usuarios/insertar', {params: {nombres: crea.nombres, apellidos: crea.apellidos, sexo: crea.sexo, username: crea.username, password: crea.password, tipo: crea.tipo  }  }).then (function(result){
+	     
 	       $scope.traer_datos();
 	        console.log('Se insertaron los datos con exito', result);
 	        

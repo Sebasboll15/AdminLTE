@@ -1,14 +1,12 @@
 angular.module('olimpiada_boom')
 
-.controller('ModalUCtrl', function($scope, $uibModalInstance, ConexionServ, usuario){
+.controller('ModalUCtrl', function($scope, $uibModalInstance, ConexionServ, usuario, $http){
    
     $scope.usuario = usuario;
 
 	$scope.ok = function(usuario){
-		consulta = "update  usuarios set password=? where rowid=?";
-		datos= [usuario.password, usuario.rowid ];
 		
-		ConexionServ.query(consulta, datos).then (function(result){
+		$http.get('::usuarios/cambiar-pass', {params: {rowid: usuario.rowid, password: usuario.password}}).then (function(result){
 
 			alert('Presionaste');
 			$uibModalInstance.close($scope.usuario);
