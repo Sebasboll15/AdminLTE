@@ -1,5 +1,5 @@
 angular.module('olimpiada_boom')
-.controller('testCtrl', function($scope, ConexionServ, $filter){
+.controller('testCtrl', function($scope, ConexionServ, $filter, $http){
     $scope.mostrando= false;
 	$scope.dejarver= false;
 	$scope.boton3= true;
@@ -39,15 +39,15 @@ angular.module('olimpiada_boom')
 
     $scope.traer_dato = function(){
 
-		consulta = "Select p.rowid, p.* from pruebas p";
-		ConexionServ.query(consulta, []).then (function(result){
-			$scope.pruebas= result ;
-			console.log('Se trajo los datos con exito', result);
-		}, function(error){
-			console.log('No se pudo traer los datos', error);
+		$http.get('::pruebas').then (function(result){
+				
+				$scope.pruebas = result.data ;
+				console.log(result);
+				console.log('Se trajo los datos con exito', result);
+			}, function(error){
+				console.log('No se pudo traer los datos', error);
 
-		})
-			
+			})
 
 
 
@@ -89,20 +89,18 @@ angular.module('olimpiada_boom')
 			};
 	
   	$scope.insertarPrueba = function(crea){
-	         consulta = "Insert into pruebas(nombre, alias, dirigido, mostrar_respuesta, puntos_promedio, tiempo_preg, tiempo_exam) values(?,?,?,?,?,?,?)";
-	         datos= [crea.nombre, crea.alias, crea.dirigido, crea.mostrar_respuesta, crea.puntos_promedio, crea.tiempo_preg, crea.tiempo_exam ];
-	         ConexionServ.query(consulta, datos).then (function(result){
-               $scope.pruebas= result ;
-                $scope.traer_dato();
- 
-                console.log('Se insertaron los datos con exito', result);
-                
-	         }, function(error){
-	           console.log('No se pudo insertar los datos', error);
+	         
+  			$http.get('::pruebas/insertar', {params: {nombre: crea.nombre, alias: crea.alias, dirigido: crea.dirigido, mostrar_respuesta: crea.mostrar_respuesta, puntos_promedio: crea.puntos_promedio, tiempo_preg: crea.tiempo_preg, tiempo_exam: crea.tiempo_exam}}).then (function(result){
+	     
+	       $scope.traer_datos();
+	        console.log('Se insertaron los datos con exito', result);
+	        
+	    }, function(error){
+	       console.log('No se pudo insertar los datos', error);
 
-	         })
+	    })
 
-	     };
+	};
   
     $scope.editarP = function(cambia){
       for (var i = 0; i < $scope.pruebas.length; i++) {
@@ -132,17 +130,15 @@ angular.module('olimpiada_boom')
      
 
    };
-    $scope.eliminar_test = function(prueba){
-	         consulta = "delete from pruebas where rowid = ? ";
-	         ConexionServ.query(consulta, [prueba]).then (function(result){
-                console.log('Se borraron los datos con exito', result);
-                 $scope.traer_dato();
+    $scope.eliminar_test = function(rowid){
+	          
+	    $http.delete('::pruebas/eliminar', {params: { id: rowid } }).then (function(result){
+			console.log('Se borraron los datos con exito', result);
+            $scope.traer_dato();
+		}, function(error){
+			console.log('No se pudo borrarlos datos', error);
 
-	         }, function(error){
-	           console.log('No se pudo borrarlos datos', error);
-
-	         })
-                   
+		})
 
          };
 

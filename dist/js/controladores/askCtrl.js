@@ -36,27 +36,25 @@ angular.module('olimpiada_boom')
 	
 	
   	$scope.insertarAsk = function(crea){
+        
         $scope.mostrando = false;
   		if (crea.definicion == '' || crea.definicion == undefined) {
   			alert('Debe escribir la definición');
   			return;
   		}
+       
+  		$http.get('::preguntas/insertar', {params: {definicion: crea.definicion, tipo: crea.tipo, prueba_id: crea.prueba_id, opc_a: crea.opc_a, opc_b: crea.opc_b, opc_c: crea.opc_c, opc_d: crea.opc_d, correcta: crea.correcta  }  }).then (function(result){
+	     
+	       $scope.traer_datos();
+	        console.log('Se insertaron los datos con exito', result);
+	        
+	    }, function(error){
+	       console.log('No se pudo insertar los datos', error);
 
+	    })
 
-
-	         consulta = "Insert into preguntas(definicion, tipo, prueba_id, opc_a, opc_b, opc_c, opc_d, correcta) values(?,?,?,?,?,?,?,?)";
-	         datos= [crea.definicion, crea.tipo, crea.prueba_id,  crea.opc_a, crea.opc_b, crea.opc_c, crea.opc_d, crea.correcta ];
-	         ConexionServ.query(consulta, datos).then (function(result){
-               $scope.preguntas= result ;
-                    $scope.traer_datos();
-                console.log('Se insertaron los datos con exito', result);
-                
-	         }, function(error){
-	           console.log('No se pudo insertar los datos', error);
-
-	         })
-             
-	     };
+	         
+	};
   
     $scope.editarP = function(cambia){
       for (var i = 0; i < $scope.preguntas.length; i++) {
@@ -69,36 +67,35 @@ angular.module('olimpiada_boom')
     
     };
     $scope.editarAsk = function(cambia){
-	         consulta = "update  preguntas set definicion=?, tipo=?, prueba_id=?, opc_a=?, opc_b=?, opc_c=?, opc_d=?, correcta=? where rowid=?";
-	         datos= [cambia.definicion, cambia.tipo, cambia.prueba_id, cambia.opc_a, cambia.opc_b, cambia.opc_c, cambia.opc_d, cambia.correcta, cambia.rowid ];
-	         ConexionServ.query(consulta, datos).then (function(result){
-            	     $scope.traer_datos();
+	           console.log(cambia);
+	           $http.get('::preguntas/editar',  {params: {definicion: cambia.definicion, tipo: cambia.tipo, prueba_id: cambia.prueba_id, opc_a: cambia.opc_a, opc_b: cambia.opc_b, opc_c: cambia.opc_c, opc_d: cambia.opc_d, correcta: cambia.correcta, rowid: cambia.rowid }}).then (function(result){
                 console.log('Se actualizaron los datos con exito', result);
-                
+                 $scope.traer_datos();
 	         }, function(error){
 	           console.log('No se pudo actualizar los datos', error);
 
 	         })
+	
 		  
 
 
      
 
    };
-    $scope.eliminar_ask = function(pregunta){
-	         consulta = "delete from preguntas where rowid = ? ";
-	         ConexionServ.query(consulta, [pregunta]).then (function(result){
-                    $scope.traer_datos();
-                console.log('Se borraron los datos con exito', result);
+    $scope.eliminar_ask = function(rowid){
+	    
+	    $http.delete('::preguntas/eliminar', {params: { id: rowid } }).then (function(result){
+			console.log('Se borraron los datos con exito', result);
+            $scope.traer_datos();
+		}, function(error){
+			console.log('No se pudo borrarlos datos', error);
 
-	         }, function(error){
-	           console.log('No se pudo borrarlos datos', error);
+		})
 
-	         })
              
 
 
-         }
+    }
 
   
 
