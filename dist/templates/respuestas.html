@@ -29,122 +29,57 @@
              
              <tbody> 
                <tr  ng-repeat="r in respuestas">
+                    
                     <th scope="row">{{r.rowid}}</th>
+                    
                     <td>
-                      <span ng-show="!r.editando">pregunta {{r.preg_id}}</span>
-                      <span ng-show="r.editando">
-                       <select class="form-control"  ng-model="r.preg_id">
-                             <option ng-repeat="p in preguntas" value="{{p.rowid}}">{{p.definicion}}</option>
-                           </select> 
+                     
+
+                      <span>pregunta {{r.preg_id}}</span>
+                     
                         
-                      </span>
-                              
+                     
                     </td>
-                    <td><span ng-show="!r.editando">{{r.usuario_id}}</span>
-                      <span ng-show="r.editando"><input type="text" ng-model="r.usuario_id"></span>
-                     </td>
-                    <td><span ng-show="!r.editando">{{r.opcion_elegida}}</span>
-                      <span ng-show="r.editando">
-                        <label>
-                          <input type="radio" ng-model="r.opcion_elegida" value="M">M
-                        </label>
-                        
-                        <label>
-                          <input type="radio" ng-model="r.opcion_elegida" value="F">F
-                        </label>
-                        
-                      </span>
+                    
+                    <td>
+                     
+                      <span>{{r.usuario_id}}</span>
+                    
                     </td>
-                    <td><span ng-show="!r.editando">{{r.correcta}}</span>
-                      <span ng-show="r.editando"><input type="text" ng-model="r.correcta"></span>
+                    
+                    <td>
+                      
+                      <span>{{r.opcion_elegida}}</span>
+
                     </td>
-                    <td><span ng-show="!r.editando">{{r.duracion}}</span>
-                      <span ng-show="r.editando"><input type="text" ng-model="r.duracion"></span>
+                     
+                     <td>
+                      
+                      <span>{{r.correcta}}</span>
+
                     </td>
+                    <td>
+
+                      <span>{{r.duracion}}</span>
+                    
+                    </td>
+                    
                     <td style="padding: 0px;">
-                      <span ng-show="!r.editando">
+                      
+                      <span>
                         
-                        <button class="btn--xs btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_ans(r.rowid)" uib-tooltip="Eliminar"></button> 
+                        <button class="btn-xs btn btn-danger glyphicon glyphicon-remove-sign" ng-click="eliminar_ans(r.rowid)" uib-tooltip="Eliminar"></button> 
                         
-                        <button ng-click="editarR(r)" class="btn-xs btn btn-info glyphicon glyphicon-pencil" uib-tooltip="Editar"></button> 
 
                       </span>
-                       
-                       <button ng-click="editarRespuesta(r)" ng-show="r.editando" class="btn-sm btn btn-info glyphicon glyphicon-ok"></button> 
+                        
                     </td>
                 
                </tr>
              </tbody> 
           </table>
 
-          <button type="button" class="btn btn-info" name="boton1" ng-show="!mostrando" ng-click="mostrar()">Crear</button>
             
-                  <div  ng-show="mostrando">
-                    <h2>Crea tus respuestas</h2>
-
-                    <div class="row">
-                      <div class="row">
-                        <div class="col-sm-3">
-                         <label>Pregunta:</label>
-                         
-                        </div>
-                        <div class="col-sm-3">
-                         <select class="form-control"  ng-model="crea.preg_id">
-                             <option ng-repeat="p in preguntas" value="{{p.rowid}}">{{p.definicion}}</option>
-                           </select> 
-                          </div>
-                      </div>
-                       <div class="row">
-                        <div class="col-sm-3">
-                         <label>Usuario:</label> 
-                        </div>
-                        <div class="col-sm-3">
-                        <select class="form-control">
-                             <option ng-repeat="u in usuarios" value="{{u.rowid}}">{{u.nombres}} {{u.apellidos}}</option>
-                           </select> 
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-sm-3">
-                         <label>Opción elegida:</label> 
-                        </div>
-                        
-                      
-                          <div class="col-sm-4">
-                           <label>
-                            <input type="radio" ng-model="crea.opcion_elegida" value="Falso">Falso
-                          </label>
-                           </div>
-                          <div class="col-sm-5">
-                          <label>
-                            <input type="radio" ng-model="crea.opcion_elegida" value="Verdadero">Verdadero
-                          </label>
-                          </div>
-                    
-                      </div>
-                      </div>
-                       <div class="row">
-                        <div class="col-sm-3">
-                         <label>Opción correcta:</label> 
-                        </div>
-                        <div class="col-sm-3">
-                         <input type="text" ng-model="crea.correcta">
-                        </div>
-                      </div>
-                       <div class="row">
-                        <div class="col-sm-3">
-                         <label>Duración:</label> 
-                        </div>
-                        <div class="col-sm-3">
-                         <input type="text" ng-model="crea.duracion">
-                        </div>
-                      </div>
-                       
-                      <button type="button" class="btn btn-info" ng-click="insertarRespuesta(crea)">Insertar</button>
-                      <button type="button" class="btn btn-danger" ng-click="salir()">Cancelar</button>
-
-                  </div>
-             </div>
    </section>
    </div>
 

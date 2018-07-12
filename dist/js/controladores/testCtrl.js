@@ -9,35 +9,8 @@ angular.module('olimpiada_boom')
 	$scope.preguntas= {};
     
 
-   $scope.seleccionarPrueba = function(prueba){
-
-
-		consulta = "UPDATE pruebas SET actual=0";
-		ConexionServ.query(consulta, []).then (function(result){
-			
-			consulta = "UPDATE pruebas SET actual=1 WHERE rowid=?";
-			ConexionServ.query(consulta, [prueba.rowid]).then (function(result){
-				for (var i = 0; i < $scope.pruebas.length; i++) {
-					$scope.pruebas[i].actual = 0;
-				}
-				prueba.actual = 1;
-			}, function(error){
-				console.log('No se pudo establecer como actual', error);
-			})
-
-		}, function(error){
-			console.log('No se pudo quitar actuales', error);
-
-		})
-			
-			
-
-
-
-	};
-
-
-    $scope.traer_dato = function(){
+  
+	$scope.traer_dato = function(){
 
 		$http.get('::pruebas').then (function(result){
 				
@@ -52,6 +25,42 @@ angular.module('olimpiada_boom')
 
 
 	};
+
+
+
+
+
+
+
+
+   $scope.seleccionarPrueba = function(prueba){
+
+
+		  	$http.get('::pruebas/Seleccionar_Prueba',  {params: {rowid: prueba.rowid} }).then (function(result){
+                
+                for (var i = 0; i < $scope.pruebas.length; i++) {
+					$scope.pruebas[i].actual = 0;
+				}
+				
+				prueba.actual = 1;
+
+				 $scope.traer_dato();
+				
+                console.log('Se actualizaron los datos con exito', result);
+               
+	         }, function(error){
+	           console.log('No se pudo actualizar los datos', error);
+
+	         })
+
+
+		
+
+
+	};
+
+
+    
 		
 
         $scope.traer_dato();
@@ -60,42 +69,40 @@ angular.module('olimpiada_boom')
 
 
 
-			$scope.mostrar= function(){
-				$scope.mostrando= true;
-				$scope.bsoton1= false;
-			
-			};
-			$scope.salir= function(){
-				$scope.mostrando= false;
-			};
+	$scope.mostrar= function(){
+		
+		$scope.mostrando= true;
+		$scope.bsoton1= false;
+	
+	};
+	
+	$scope.salir= function(){
+		$scope.mostrando= false;
+	};
 	 		
-	 		$scope.verDetallesPrueba= function(id){
-				$scope.dejarver= true;
-				$scope.boton3= false;
+	$scope.verDetallesPrueba= function(id){
+		$scope.dejarver= true;
+		$scope.boton3= false;
 			    
 
-				$http.get('::pruebas/Detalles').then (function(result){
-					console.log(result);
-					$scope.usuarios = result.data ;
+		$http.get('::pruebas/Detalles').then (function(result){
+		console.log('Hola', result);
+	    $scope.usuarios = result.data.usuarios ;
+		$scope.preguntas = result.data.preguntas; 
 				
-				}, function(error){
-					console.log('No se pudo traer los datos', error);
-
-				})
-					$http.get('::pruebas/Detalles').then (function(result){
-					console.log(result);
-					$scope.preguntas = result.data ;
 				
-				}, function(error){
-					console.log('No se pudo traer los datos', error);
+		}, function(error){
+			console.log('No se pudo traer los datos', error);
 
-				})
+		})
+				
 
-
-			};
-			$scope.ocultar= function(){
-				$scope.dejarver= false;
-			};
+	};
+	
+	$scope.ocultar= function(){
+		
+		$scope.dejarver= false;
+	};
 	
   	$scope.insertarPrueba = function(crea){
 	         
@@ -121,6 +128,7 @@ angular.module('olimpiada_boom')
 
     
     };
+    
     $scope.editarPrueba = function(cambia){
 	         
 		  
@@ -136,6 +144,7 @@ angular.module('olimpiada_boom')
      
 
    };
+    
     $scope.eliminar_test = function(rowid){
 	          
 	    $http.delete('::pruebas/eliminar', {params: { id: rowid } }).then (function(result){
@@ -146,17 +155,10 @@ angular.module('olimpiada_boom')
 
 		})
 
-         };
+    };
 
     
-     $scope.seleccionarUsuarios = function(usu){
-
-
-		consulta = "Select from usuarios where actual=0";
-		ConexionServ.query(consulta, []).then (function(result){
-	   })		     
-     }; 
 	
    
 	
-	});
+});

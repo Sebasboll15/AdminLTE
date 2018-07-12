@@ -120,7 +120,7 @@
           </table>
 
 
-          <button type="button" class="btn btn-primary btn-lg btn-block" name="boton1" ng-show="!mostrando" ng-click="mostrar()">Crear usuarios</button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" name="boton1" ng-show="!mostrando" ng-click="mostrar()">Crear prueba</button>
           
             
                   <div  ng-show="mostrando">
@@ -256,8 +256,8 @@
                                <th>Preguntas</th>
                               </thead>
                                    <tbody> 
-                                          <tr  ng-repeat="usuario in usuarios">
-                                          <td>Pregunta N°{{usuario.rowid}} Tipo: {{usuario.tipo}}</td>
+                                          <tr  ng-repeat="pregunta in preguntas">
+                                          <td>Pregunta N°{{pregunta.rowid}} Tipo: {{pregunta.tipo}} </td>
                                        </tr>
                                    </tbody> 
                         </table>

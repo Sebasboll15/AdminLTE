@@ -7,7 +7,7 @@ angular.module('olimpiada_boom')
     $scope.respuesta_llevada={};
     $scope.indice_preg = 0;
 
-  
+  console.log($scope.usuario);
 	consulta = "Select p.*, p.rowid from pruebas p WHERE p.rowid = ?";
 	ConexionServ.query(consulta, [$scope.usuario.prueba_id]).then (function(result){
 		$scope.prueba = result[0] ;
@@ -38,7 +38,7 @@ angular.module('olimpiada_boom')
     	}
          
     	consulta = "Insert into respuestas(preg_id, usuario_id, opcion_elegida, correcta, duracion) values(?,?,?,?,?)";
-	    datos = [$scope.preguntas[$scope.indice_preg].rowid, USER.nombres + USER.apellidos, opcion, correcta, 0];
+	    datos = [$scope.preguntas[$scope.indice_preg].rowid, USER.rowid, opcion, correcta, 0];
 	    
 	    ConexionServ.query(consulta, datos).then (function(result){
         	
