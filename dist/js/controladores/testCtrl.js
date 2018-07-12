@@ -73,16 +73,25 @@ angular.module('olimpiada_boom')
 				$scope.dejarver= true;
 				$scope.boton3= false;
 			    
-				consulta = "Select u.nombres, u.apellidos, u.rowid from usuarios u INNER JOIN pruebas p ON p.rowid= u.prueba_id";
-				ConexionServ.query(consulta, []).then (function(result){
-			        console.log( result);
-                
-			    })
-			    consulta = "Select  p.tipo, p.rowid from preguntas p INNER JOIN pruebas prueba ON prueba.rowid= p.prueba_id";
-				ConexionServ.query(consulta, []).then (function(result){
-                     $scope.preguntas = result ;
-			   			 console.log(  $scope.preguntas);
-			   })			     
+
+				$http.get('::pruebas/Detalles').then (function(result){
+					console.log(result);
+					$scope.usuarios = result.data ;
+				
+				}, function(error){
+					console.log('No se pudo traer los datos', error);
+
+				})
+					$http.get('::pruebas/Detalles').then (function(result){
+					console.log(result);
+					$scope.preguntas = result.data ;
+				
+				}, function(error){
+					console.log('No se pudo traer los datos', error);
+
+				})
+
+
 			};
 			$scope.ocultar= function(){
 				$scope.dejarver= false;
@@ -92,7 +101,7 @@ angular.module('olimpiada_boom')
 	         
   			$http.get('::pruebas/insertar', {params: {nombre: crea.nombre, alias: crea.alias, dirigido: crea.dirigido, mostrar_respuesta: crea.mostrar_respuesta, puntos_promedio: crea.puntos_promedio, tiempo_preg: crea.tiempo_preg, tiempo_exam: crea.tiempo_exam}}).then (function(result){
 	     
-	       $scope.traer_datos();
+	       $scope.traer_dato();
 	        console.log('Se insertaron los datos con exito', result);
 	        
 	    }, function(error){
@@ -113,18 +122,15 @@ angular.module('olimpiada_boom')
     
     };
     $scope.editarPrueba = function(cambia){
-	         consulta = "update  pruebas set nombre=?, alias=?, dirigido=?, mostrar_respuesta=?,puntos_promedio=?, tiempo_preg=?, tiempo_exam=? where rowid=?";
-	         datos= [cambia.nombre, cambia.alias, cambia.dirigido, cambia.mostrar_respuesta, cambia.puntos_promedio,cambia.tiempo_preg,cambia.tiempo_exam, cambia.rowid ];
-	         ConexionServ.query(consulta, datos).then (function(result){
-               $scope.traer_dato();
-
+	         
+		  
+		  	$http.get('::pruebas/editar',  {params: { nombre: cambia.nombre, alias: cambia.alias, dirigido: cambia.dirigido, mostrar_respuesta: cambia.mostrar_respuesta, puntos_promedio: cambia.puntos_promedio, tiempo_preg: cambia.tiempo_preg, tiempo_exam: cambia.tiempo_exam, rowid: cambia.rowid} }).then (function(result){
                 console.log('Se actualizaron los datos con exito', result);
-                
+                 $scope.traer_dato();
 	         }, function(error){
 	           console.log('No se pudo actualizar los datos', error);
 
 	         })
-		  
 
 
      
