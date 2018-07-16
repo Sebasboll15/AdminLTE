@@ -1,5 +1,5 @@
 angular.module('olimpiada_boom')
-.controller('testCtrl', function($scope, ConexionServ, $filter, $http){
+.controller('testCtrl', function($scope, $filter, $http){
     $scope.mostrando= false;
 	$scope.dejarver= false;
 	$scope.boton3= true;
@@ -9,27 +9,31 @@ angular.module('olimpiada_boom')
 	$scope.preguntas= {};
     
 
-  
-	$scope.traer_dato = function(){
+   $scope.traer_datos = function(){
+   			$http.get('::pruebas').then (function(result){
+				     
+				    
+    
 
-		$http.get('::pruebas').then (function(result){
-				
-				$scope.pruebas = result.data ;
-				console.log(result);
-				console.log('Se trajo los datos con exito', result);
-			}, function(error){
-				console.log('No se pudo traer los datos', error);
+              $scope.pruebas = result.data  ;
+				                
+				                
+				     console.log('Se trajo los datos con exito', result);
+				    }, function(error){
+				      console.log('No se pudo traer los datos', error);
 
-			})
-
-
-
-	};
-
-
+				    })
+   	};
+   	$scope.traer_datos();
 
 
+	
 
+       
+	
+
+
+	
 
 
 
@@ -43,8 +47,10 @@ angular.module('olimpiada_boom')
 				}
 				
 				prueba.actual = 1;
+                    
+				$scope.traer_datos();
 
-				 $scope.traer_dato();
+				
 				
                 console.log('Se actualizaron los datos con exito', result);
                
@@ -63,9 +69,7 @@ angular.module('olimpiada_boom')
     
 		
 
-        $scope.traer_dato();
-
-
+       
 
 
 
@@ -108,7 +112,10 @@ angular.module('olimpiada_boom')
 	         
   			$http.get('::pruebas/insertar', {params: {nombre: crea.nombre, alias: crea.alias, dirigido: crea.dirigido, mostrar_respuesta: crea.mostrar_respuesta, puntos_promedio: crea.puntos_promedio, tiempo_preg: crea.tiempo_preg, tiempo_exam: crea.tiempo_exam}}).then (function(result){
 	     
-	       $scope.traer_dato();
+	     $scope.traer_datos();
+
+
+
 	        console.log('Se insertaron los datos con exito', result);
 	        
 	    }, function(error){
@@ -134,7 +141,10 @@ angular.module('olimpiada_boom')
 		  
 		  	$http.get('::pruebas/editar',  {params: { nombre: cambia.nombre, alias: cambia.alias, dirigido: cambia.dirigido, mostrar_respuesta: cambia.mostrar_respuesta, puntos_promedio: cambia.puntos_promedio, tiempo_preg: cambia.tiempo_preg, tiempo_exam: cambia.tiempo_exam, rowid: cambia.rowid} }).then (function(result){
                 console.log('Se actualizaron los datos con exito', result);
-                 $scope.traer_dato();
+              $scope.traer_datos();
+
+
+
 	         }, function(error){
 	           console.log('No se pudo actualizar los datos', error);
 
@@ -149,7 +159,10 @@ angular.module('olimpiada_boom')
 	          
 	    $http.delete('::pruebas/eliminar', {params: { id: rowid } }).then (function(result){
 			console.log('Se borraron los datos con exito', result);
-            $scope.traer_dato();
+         $scope.traer_datos();
+ 
+
+
 		}, function(error){
 			console.log('No se pudo borrarlos datos', error);
 

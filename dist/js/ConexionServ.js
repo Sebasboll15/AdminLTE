@@ -1,6 +1,6 @@
 angular.module('olimpiada_boom')
 
-.factory('ConexionServ', function($q, $http, $timeout) {
+.factory('ConexionServ', function($q, $http, $timeout ) {
 
   var db;
 

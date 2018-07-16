@@ -1,34 +1,28 @@
 angular.module('olimpiada_boom')
 
-.controller('Prueba_respuestasCtrl', function(ConexionServ, $scope, AuthServ, USER, $state ){
+.controller('Prueba_respuestasCtrl', function(ConexionServ, $scope, AuthServ, USER, $state, $http ){
 
 	ConexionServ.createTables();
 	$scope.usuario= USER ;
     $scope.respuesta_llevada={};
     $scope.indice_preg = 0;
+   
+    
+    $http.get('::Prueba_en_curso',  {params: { rowid: USER.prueba_id} }).then (function(result){
+            console.log(result);
+            $scope.prueba = result.data.prueba ;
+            $scope.preguntas = result.data.preguntas ;
+            console.log('Se trajo los datos con exito', result);
+        }, function(error){
+            console.log('No se pudo traer los datos', error);
 
-  console.log($scope.usuario);
-	consulta = "Select p.*, p.rowid from pruebas p WHERE p.rowid = ?";
-	ConexionServ.query(consulta, [$scope.usuario.prueba_id]).then (function(result){
-		$scope.prueba = result[0] ;
+        })
+            
 
-		consulta = "Select p.* , p.rowid from preguntas p where p.prueba_id=? ";
-		ConexionServ.query(consulta, [$scope.prueba.rowid]).then (function(result){
-			$scope.preguntas = result ;
-			
-			console.log('Se trajo los datos con exito', $scope.preguntas);
-		}, function(error){
-			console.log('No se pudo traer los datos', error);
 
-		})
+    
 
-                 
-	}, function(error){
-		console.log('No se pudo traer los datos', error);
-
-	})
 	
-	$scope.traer_dato();
 
     $scope.seleccionarOpcion = function(opcion) {
 
@@ -36,12 +30,19 @@ angular.module('olimpiada_boom')
     	if ($scope.preguntas[$scope.indice_preg].correcta == opcion ) {
     		correcta = 1;
     	}
+        
+
+        $http.get('::Prueba_en_curso/insertar', {params: {preg_id: $scope.preguntas[$scope.indice_preg].rowid, usuario_id: USER.rowid, opcion_elegida: opcion, correcta: correcta, duracion: 0 }  }).then (function(result){
          
-    	consulta = "Insert into respuestas(preg_id, usuario_id, opcion_elegida, correcta, duracion) values(?,?,?,?,?)";
-	    datos = [$scope.preguntas[$scope.indice_preg].rowid, USER.rowid, opcion, correcta, 0];
-	    
-	    ConexionServ.query(consulta, datos).then (function(result){
-        	
+        
+            console.log('Se insertaron los datos con exito', result);
+            
+         }, function(error){
+           console.log('No se pudo insertar los datos', error);
+
+         })
+
+
         	if ($scope.prueba.dirigido == 1) {
 
         	}else{
@@ -57,10 +58,6 @@ angular.module('olimpiada_boom')
         	};
         	
                 
-        }, function(error){
-           console.log('No se pudo insertar los datos', error);
-
-        })
 
 
     };    	
