@@ -26,7 +26,7 @@ angular.module('olimpiada_boom')
 
 
 	    MySocket.emit('toma_mis_datos', {usuario: $scope.USER}, function(datos){
-	    	console.log('Ya mandé los datos');
+	    	console.log('Ya mandé los datos', datos);
 	    })
 		
 		
