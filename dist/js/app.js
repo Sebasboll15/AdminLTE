@@ -38,7 +38,7 @@ angular.module('olimpiada_boom',  [
 			controller:'DashboardCtrl',
 			templateUrl: 'dist/templates/dashboard.html',
 			resolve: {
-				USER: ['AuthServ', function(AuthServ){
+				USER: ['AuthServ', function(AuthServ, MySocket){
 					return AuthServ.verificar_user_logueado();
 				}]
 			}

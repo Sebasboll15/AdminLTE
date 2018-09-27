@@ -6,33 +6,31 @@ angular.module('olimpiada_boom')
 	$scope.traer_datos = function(){
 		$http.get('::Dashboard').then (function(result){
 			$scope.pruebas= result.data ;
-			
-			console.log('Se trajo los datos con exito', result);
 		}, function(error){
 			console.log('No se pudo traer los datos', error);
 
 		})
 	};
-	$scope.traer_datos();		
+	$scope.traer_datos();
 
-	AuthServ.verificar_user_logueado().then(function(r){
+
+
+	AuthServ.verificar_user_logueado().then( function(r){
+
 		$scope.USER = r;
+		console.log($scope.USER, 'ffffff');
+	    
+	    setTimeout(function(){
 
-		if ($scope.USER.tipo == 'Usuario') {
-			$state.go('main.prueba_respuesta');
-		}else {
-			$state.go('main');
-		}
+	       MySocket.emit('toma_mis_datos', {usuario: $scope.USER})
 
-
-	    MySocket.emit('toma_mis_datos', {usuario: $scope.USER}, function(datos){
-	    	console.log('Ya mandé los datos', datos);
-	    })
+	       }, 1000);
+	   
 		
-		
-	})
+	});
 	
      
+    
 
     $scope.traer_puestos = function(){
 

@@ -23,17 +23,20 @@
                     <div class="panel-body">
                       <h4>Conectados</h4>
                     </div>
-                    <div class="panel-footer">Pie del panel</div>
+                    
                   </div> 
             </div>
             
             <div class="row">
               <div class="col-xs-12">
-                <div class="panel panel-success" ng-repeat="cliente in clientes" >
-                    <div>
-                      <h5>{{cliente.nombre_punto}}</h5>
-
-                    </div>
+                <div  ng-repeat="cliente in clientes" >
+                  
+                <div class="panel panel-success" ng-click="OpenModalUser(cliente)">   
+                   <div>{{cliente.nombres}}</div>
+                    <div>{{cliente.apellidos}}</div>
+                     <div>{{cliente.nombre_punto}}</div>
+                  
+                 </div>   
 
                      
                 </div>

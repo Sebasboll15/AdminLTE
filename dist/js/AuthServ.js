@@ -13,7 +13,7 @@ angular.module('olimpiada_boom')
           
         verificar_user_logueado: function(){
             var defered = $q.defer();
-            
+
             if (localStorage.logueado){
                 if (localStorage.logueado == 'true'){
                     

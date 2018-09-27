@@ -1,7 +1,7 @@
 angular.module('olimpiada_boom')
 
 
-.controller('ControlCtrl', function($scope, ConexionServ, $filter, MySocket){
+.controller('ControlCtrl', function($scope, ConexionServ, $filter, MySocket, $uibModal){
    $scope.mostrando = false;
 	$scope.boton1 	= true;
      $scope.clientes = [];
@@ -9,21 +9,39 @@ angular.module('olimpiada_boom')
     
  
 
+    setTimeout(function(){
 
-    MySocket.emit('traer_clientes');
+       MySocket.emit('tomen_mis_datos');
 
+       }, 1000);
+       
+       MySocket.on('alguien_logueado', function(datos){
+        setTimeout(function(){  MySocket.emit('traer_clientes')
+
+          }, 1000);
+
+
+        });
     
-    MySocket.on('clientes_traidos', function(res){
+    MySocket.on('clientes_traidos',function(res){
        
           $scope.clientes = res ;
            console.log('hola', $scope.clientes);
     })
-     
-    MySocket.on('tomen_los_datos', function(datos){
-       
-          $scope.clientes = res ;
-           console.log( $scope.clientes);
-    })
+ 
+
+    $scope.OpenModalUser = function (cliente) {
+
+      var modalInstance = $uibModal.open({
+      templateUrl: 'dist/templates/ModalControlUser.html',
+      controller: 'ModalControlUserCtrl',
+      resolve: {
+          cliente: function () {
+            return cliente;
+          }
+      },
+        })
+    }
     
 
 

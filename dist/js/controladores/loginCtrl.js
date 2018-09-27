@@ -1,6 +1,12 @@
 angular.module('olimpiada_boom')
 
-  .controller('loginCtrl', function($scope,  $state, ConexionServ, $http, $filter, $uibModal, AuthServ){
+
+  .controller('MainCtrl', function(MySocket){
+
+  })
+
+
+  .controller('loginCtrl', function($scope, MySocket, $state, ConexionServ, $http, $filter, $uibModal, AuthServ){
        $scope.user = {username: 'jorge', password: '123'}
     
     if (localStorage.servidor) {

@@ -13,13 +13,14 @@ angular.module('olimpiada_boom')
 	}
 
 
-	console.log(dominio);
-
 	//url 		= 'ws://' + dominio + ':8787';
-	socket = io.connect(dominio + ':8787');
+	var socket = io.connect(dominio + ':8787');
 
 
 
+	socket.on('connect', function(data){
+		console.log('Conectado');
+	});
 
 	socket.on('te_conectaste', function(data){
 
@@ -53,6 +54,7 @@ angular.module('olimpiada_boom')
 		},
 
 		emit: function(eventName, data, callback){
+			console.log(eventName, data);
 			socket.emit(eventName, data, function(){
 				args = arguments;
 				$rootScope.$apply( function(){
