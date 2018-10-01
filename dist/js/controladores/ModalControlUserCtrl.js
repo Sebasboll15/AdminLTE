@@ -16,16 +16,14 @@ angular.module('olimpiada_boom')
 	$scope.cerrar_se = function(datos){
        
 
-       $scope.id= datos.id;
+       $scope.id = datos.resourceId
 
        console.log($scope.id, 'jjjjj');
 
 
         MySocket.emit('cierra_ su_sesion',  $scope.id);
         
-      MySocket.on('sesion_cerrada', function(datos){
-    	console.log(datos);
-      })
+      
 
 
 	};

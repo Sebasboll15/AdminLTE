@@ -1,12 +1,12 @@
 angular.module('olimpiada_boom')
 
 
-.controller('ControlCtrl', function($scope, ConexionServ, $filter, MySocket, $uibModal){
+.controller('ControlCtrl', function($scope, ConexionServ, $filter, MySocket, $uibModal, USER){
    $scope.mostrando = false;
 	$scope.boton1 	= true;
      $scope.clientes = [];
-    
-    
+    $scope.user = USER.id;
+      console.log($scope.user);
  
 
     setTimeout(function(){
@@ -27,7 +27,17 @@ angular.module('olimpiada_boom')
        
           $scope.clientes = res ;
            console.log('hola', $scope.clientes);
-    })
+
+           for (var i = 0; i < $scope.clientes.length; i++) {
+         $scope.clientes[i].id == $scope.user ;
+        
+          $scope.clientes[i].resourceId = $scope.idUSUARIO;
+            console.log('PERRO', $scope.idUSUARIO);
+        };
+          
+  
+
+    });
  
 
     $scope.OpenModalUser = function (cliente) {

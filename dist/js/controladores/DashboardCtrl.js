@@ -29,8 +29,14 @@ angular.module('olimpiada_boom')
 		
 	});
 	
+	   
+
      
-    
+    	MySocket.on('sesion_a_cerrar', function(id){
+    		if (id) {} else {}
+
+    	
+      	})
 
     $scope.traer_puestos = function(){
 
